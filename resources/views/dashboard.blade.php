@@ -84,7 +84,7 @@
               </div>
             </div>
             <div class="card-body">
-              <canvas id="myChart" height="182"></canvas>
+              <canvas id="myChart" height="120"></canvas>
             </div>
           </div>
         </div>

@@ -19,6 +19,7 @@ require('bootstrap');
 require('jquery.nicescroll');
 require('chart.js');
 require('datatables.net-responsive-bs4');
+window.Swal = require('sweetalert2');
 
 require('./stisla/stisla');
 require('./stisla/scripts');

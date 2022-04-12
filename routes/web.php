@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Yajra\Datatables\Datatables;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('employes', EmployeController::class);
+
+    Route::view('/', 'dashboard')->name('dashboard');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::view('/login', 'login');
-
-Route::view('/', 'dashboard')->name('dashboard');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'handleLogin'])->name('login');
+});

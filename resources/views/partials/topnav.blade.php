@@ -4,16 +4,15 @@
   </ul>
 </form>
 <ul class="navbar-nav navbar-right">
-  <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-    <div class="d-sm-none d-lg-inline-block">Halo, Dani</div></a>
+  <li class="dropdown"><a href="#" data-toggle="dropdown"
+      class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+      <div class="d-sm-none d-lg-inline-block">Halo, {{ auth()->user()->nama_lengkap }}</div>
+    </a>
     <div class="dropdown-menu dropdown-menu-right">
-      <div class="dropdown-title">Welcome, John Doe</div>
-      <a href="#" class="dropdown-item has-icon">
-        <i class="far fa-user"></i> Profile Settings
-      </a>
+      <div class="dropdown-title">Halo, {{ auth()->user()->nama_lengkap }}</div>
       <div class="dropdown-divider"></div>
-      <a href="#" class="dropdown-item has-icon text-danger">
-        <i class="fas fa-sign-out-alt"></i> Logout
+      <a href="{{route('logout')}}" class="dropdown-item has-icon text-danger">
+        <i class="fas fa-sign-out-alt"></i> Keluar
       </a>
     </div>
   </li>

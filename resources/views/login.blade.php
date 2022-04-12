@@ -14,48 +14,48 @@
       <div class="d-flex flex-wrap align-items-stretch">
         <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
           <div class="p-4 m-3">
-            <img src="../assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
-            <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span></h4>
-            <p class="text-muted">Before you get started, you must login or register if you don't already have an
-              account.</p>
-            <form method="POST" action="#" class="needs-validation" novalidate="">
+            <img src="../assets/img/logo.png" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
+            <h4 class="text-dark font-weight-normal">Selamat datang di <span class="font-weight-bold">Ad'nDrink</span>
+            </h4>
+            <p class="text-muted">Silahkan untuk masuk ke menu admin.</p>
+            <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+              @csrf
               <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                <label for="nama_pengguna">Nama Pengguna</label>
+                <input id="nama_pengguna" type="text" class="form-control" name="nama_pengguna" tabindex="1" required
+                  autofocus>
                 <div class="invalid-feedback">
-                  Please fill in your email
+                  Nama pengguna tidak boleh kosong
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="d-block">
-                  <label for="password" class="control-label">Password</label>
+                  <label for="password" class="control-label">Kata Sandi</label>
                 </div>
-                <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                <input id="password" type="password" name="password" class="form-control" name="password" tabindex="2"
+                  required>
                 <div class="invalid-feedback">
-                  please fill in your password
+                  Kata sandi tidak boleh kosong
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                  <label class="custom-control-label" for="remember-me">Remember Me</label>
+                  <input type="checkbox" name="remember_me" class="custom-control-input" tabindex="3" id="remember-me">
+                  <label class="custom-control-label" for="remember-me">Ingat Saya</label>
                 </div>
               </div>
 
               <div class="form-group text-right">
-                <a href="auth-forgot-password.html" class="float-left mt-3">
-                  Forgot Password?
-                </a>
                 <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
-                  Login
+                  Masuk
                 </button>
               </div>
             </form>
 
             <div class="text-center mt-5 text-small">
-              Copyright &copy; Your Company. Made with 💙 by Stisla
+              Copyright &copy; Ad'nDrink.
               <div class="mt-2">
                 <a href="#">Privacy Policy</a>
                 <div class="bullet"></div>

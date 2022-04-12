@@ -41,11 +41,11 @@
 
     <li class="menu-header">Karyawan</li>
 
-    <li class="dropdown">
+    <li class="dropdown {{ request()->routeIs('employes.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Karyawan</span></a>
       <ul class="dropdown-menu">
-        <li><a class="nav-link" href="">Data Karyawan</a></li>
-        <li><a class="nav-link" href="">Tambah Karyawan</a></li>
+        <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}"><a class="nav-link" href="{{route('employes.index')}}">Data Karyawan</a></li>
+        <li class="{{ request()->routeIs('employes.create') ? 'active' : '' }}"><a class="nav-link" href="{{route('employes.create')}}">Tambah Karyawan</a></li>
       </ul>
     </li>
   </ul>
