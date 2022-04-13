@@ -20,6 +20,7 @@ require('jquery.nicescroll');
 require('chart.js');
 require('datatables.net-responsive-bs4');
 window.Swal = require('sweetalert2');
+window.iziToast = require('izitoast');
 
 require('./stisla/stisla');
 require('./stisla/scripts');

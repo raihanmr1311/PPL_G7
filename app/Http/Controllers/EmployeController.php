@@ -42,7 +42,7 @@ class EmployeController extends Controller
         $data = $request->validate(
             [
                 'nama_lengkap' => 'required',
-                'nama_pengguna' => 'required',
+                'nama_pengguna' => 'required|unique:karyawan',
                 'no_hp' => 'required',
                 'alamat' => 'required',
                 'nomor' => 'required',
@@ -53,10 +53,11 @@ class EmployeController extends Controller
         $hashedPassword = Hash::make($data['password']);
         $data['password'] = $hashedPassword;
 
+        if (Employe::create($data)) {
+            return redirect(route('employes.index'))->with('success', 'Data berhasil ditambahkan');
+        }
 
-        Employe::create($data);
-
-        return redirect(route('employes.index'));
+        return redirect(route('employes.index'))->with('error', 'Terjadi kesalahan ketika menambahkan data');
     }
 
     public function show(Employe $employe)
@@ -71,12 +72,36 @@ class EmployeController extends Controller
 
     public function update(Request $request, Employe $employe)
     {
-        //
+        $data = $request->validate([
+            'nama_lengkap' => 'required',
+            'nama_pengguna' => 'required|unique:karyawan,nama_pengguna,' . $employe->id,
+            'no_hp' => 'required',
+            'alamat' => 'required',
+            'nomor' => 'required',
+            'password' => '',
+        ]);
+
+        if (!$request->password) {
+            $request->password = $employe->password;
+        } else {
+            $request->password = bcrypt($request->password);
+        }
+
+        $data['password'] = $request->password;
+
+        if ($employe->update($data)) {
+            return redirect(route('employes.index'))->with('success', 'Data berhasil diubah');
+        }
+
+        return redirect(route('employes.index'))->with('error', 'Terjadi kesalahan ketika mengubah data');
     }
 
     public function destroy(Employe $employe)
     {
-        $employe->delete();
-        return redirect(route('employes.index'));
+        if ($employe->delete()) {
+            return redirect(route('employes.index'))->with('success', 'Data berhasil dihapus');
+        }
+
+        return redirect(route('employes.index'))->with('error', 'Terjadi kesalahan ketika menghapus data');
     }
 }

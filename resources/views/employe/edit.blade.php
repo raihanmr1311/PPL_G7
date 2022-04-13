@@ -90,7 +90,7 @@
                 @enderror
               </div>
 
-              <button class="btn btn-primary float-right" type="submit">Tambah</button>
+              <button class="btn btn-primary float-right" type="submit">Ubah</button>
             </div>
 
           </form>

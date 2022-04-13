@@ -44,8 +44,22 @@
   </section>
 @endsection
 
+
+
+
 @push('javascript')
   <script>
+    @if ($message = Session::get('success'))
+      iziToast.success({
+      title: '{{ $message }}',
+      position: 'topRight',
+      });
+    @elseif($message = Session::get('error'))
+      iziToast.success({
+      title: '{{ $message }}',
+      position: 'topRight',
+      });
+    @endif
     $("#table-1").dataTable({
       processing: true,
       serverSide: true,

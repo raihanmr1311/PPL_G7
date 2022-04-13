@@ -39,6 +39,7 @@ __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 __webpack_require__(/*! datatables.net-responsive-bs4 */ "./node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js");
 
 window.Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+window.iziToast = __webpack_require__(/*! izitoast */ "./node_modules/izitoast/dist/js/iziToast.js");
 
 __webpack_require__(/*! ./stisla/stisla */ "./resources/js/stisla/stisla.js");
 
