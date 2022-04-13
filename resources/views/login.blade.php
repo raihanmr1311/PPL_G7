@@ -17,16 +17,18 @@
             <img src="../assets/img/logo.png" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
             <h4 class="text-dark font-weight-normal">Selamat datang di <span class="font-weight-bold">Ad'nDrink</span>
             </h4>
-            <p class="text-muted">Silahkan untuk masuk ke menu admin.</p>
-            <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+            <p class="text-muted">Silahkan login untuk masuk ke menu admin.</p>
+            <form method="POST" action="{{ route('login') }}">
               @csrf
+              @error('authError')
+              <div class="alert alert-danger">
+                  Kredesial yang diberikan tidak ditemukan
+              </div>
+              @enderror
               <div class="form-group">
                 <label for="nama_pengguna">Nama Pengguna</label>
                 <input id="nama_pengguna" type="text" class="form-control" name="nama_pengguna" tabindex="1" required
                   autofocus>
-                <div class="invalid-feedback">
-                  Nama pengguna tidak boleh kosong
-                </div>
               </div>
 
               <div class="form-group">
@@ -35,9 +37,6 @@
                 </div>
                 <input id="password" type="password" name="password" class="form-control" name="password" tabindex="2"
                   required>
-                <div class="invalid-feedback">
-                  Kata sandi tidak boleh kosong
-                </div>
               </div>
 
               <div class="form-group">
@@ -55,28 +54,13 @@
             </form>
 
             <div class="text-center mt-5 text-small">
-              Copyright &copy; Ad'nDrink.
-              <div class="mt-2">
-                <a href="#">Privacy Policy</a>
-                <div class="bullet"></div>
-                <a href="#">Terms of Service</a>
-              </div>
+              Copyright &copy; Ad'nDrink
             </div>
           </div>
         </div>
         <div
           class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
-          data-background="https://images.unsplash.com/photo-1510797215324-95aa89f43c33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1635&q=80">
-          <div class="absolute-bottom-left index-2">
-            <div class="text-light p-5 pb-2">
-              <div class="mb-5 pb-3">
-                <h1 class="mb-2 display-4 font-weight-bold">Good Morning</h1>
-                <h5 class="font-weight-normal text-muted-transparent">Bali, Indonesia</h5>
-              </div>
-              Photo by <a class="text-light bb" target="_blank" href="https://unsplash.com/photos/a8lTjWJJgLA">Justin
-                Kauffman</a> on <a class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>
-            </div>
-          </div>
+          data-background="https://picsum.photos/1635/2181?random=1">
         </div>
       </div>
     </section>
