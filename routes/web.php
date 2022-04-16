@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Yajra\Datatables\Datatables;
@@ -19,7 +20,8 @@ use Yajra\Datatables\Datatables;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('employes', EmployeController::class);
+    Route::resource('employes', EmployeController::class)->except(['show']);
+    Route::resource('items', ItemController::class)->except(['show']);
 
     Route::view('/', 'dashboard')->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
