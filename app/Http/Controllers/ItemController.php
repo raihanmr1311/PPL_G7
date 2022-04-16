@@ -11,7 +11,7 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        $data = Item::orderBy('id', 'DESC');
+        $data = Item::all();
 
         if ($request->ajax()) {
             return Datatables::of($data)->addIndexColumn()->addColumn('action', function (Item $item) {

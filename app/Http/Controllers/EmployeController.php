@@ -11,7 +11,7 @@ class EmployeController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Employe::orderBy('created_at', 'DESC');
+        $data = Employe::all();
 
         if ($request->ajax()) {
             return Datatables::of($data)->addIndexColumn()->addColumn('action', function (Employe $employe) {

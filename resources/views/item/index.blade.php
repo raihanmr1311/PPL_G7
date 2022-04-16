@@ -57,14 +57,15 @@
     $("#table-1").dataTable({
       processing: true,
       serverSide: true,
+      order: [[0, 'desc']],
       ajax: '{{ route('items.index') }}',
-      order: [],
-      columns: [{
+      columns: [
+        {
           searchable: false,
-          orderable: false,
           class: 'text-center',
           data: 'DT_RowIndex'
         },
+
         {
           data: 'nama'
         },

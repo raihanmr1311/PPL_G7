@@ -63,11 +63,10 @@
     $("#table-1").dataTable({
       processing: true,
       serverSide: true,
+      order: [[0, 'desc']],
       ajax: '{{ route('employes.index') }}',
-      order: [],
       columns: [{
           searchable: false,
-          orderable: false,
           class: 'text-center',
           data: 'DT_RowIndex'
         },
