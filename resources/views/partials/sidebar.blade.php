@@ -31,11 +31,11 @@
     </li>
 
 
-    <li class="dropdown">
-      <a href="" class="nav-link has-dropdown"><i class="fas fa-industry"></i> <span>Produk</span></a>
+    <li class="dropdown {{ request()->routeIs('items.*') ? 'active' : '' }}">
+      <a href="" class="nav-link has-dropdown"><i class="fas fa-industry"></i> <span>Barang</span></a>
       <ul class="dropdown-menu">
-        <li><a class="nav-link" href="">Data Produk</a></li>
-        <li><a class="nav-link" href="">Tambah Produk</a></li>
+        <li class="{{ request()->routeIs('items.index') ? 'active' : '' }}"><a class="nav-link" href="{{route('items.index')}}">Data Barang</a></li>
+        <li class="{{ request()->routeIs('items.create') ? 'active' : '' }}"><a class="nav-link" href="{{route('items.create')}}">Tambah Barang</a></li>
       </ul>
     </li>
 
