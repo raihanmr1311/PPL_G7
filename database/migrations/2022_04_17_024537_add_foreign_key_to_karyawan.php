@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('detail_pemasukan', function (Blueprint $table) {
-
+        Schema::table('karyawan', function (Blueprint $table) {
             $table->after('id', function ($table) {
-                $table->foreignId('id_pemasukan')->constrained('pemasukan')->cascadeOnUpdate()->restrictOnDelete();
-                $table->foreignId('id_barang')->constrained('barang')->cascadeOnUpdate()->restrictOnDelete();
+                $table->foreignId('id_kecamatan')->constrained('kecamatan')->cascadeOnUpdate()->restrictOnDelete();
             });
         });
     }
@@ -29,7 +27,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('detail_pemasukan', function (Blueprint $table) {
+        Schema::table('karyawan', function (Blueprint $table) {
             //
         });
     }
