@@ -28,7 +28,7 @@ class EmployeController extends Controller
                 </form>';
             })->addColumn('kecamatan', function (Employe $employe) {
                 return $employe->district->kecamatan;
-            })->rawColumns(['action'])->make(true);
+            })->make(true);
         }
 
         return view('employe.index');
