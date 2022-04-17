@@ -65,6 +65,22 @@
               </div>
 
               <div class="form-group">
+                <label for="kecamatan">Kecamatan</label>
+                <select class="form-control select2" name="id_kecamatan" id="kecamatan">
+                  @foreach ($districts as $district)
+                    <option value="{{ $district->id }}">{{ $district->kecamatan }}</option>
+                  @endforeach
+                </select>
+
+                @error('kecamatan')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+
+
+              <div class="form-group">
                 <label for="nomor">Nomor</label>
                 <input id="nomor" value="{{ old('nomor') }}" type="text" name="nomor"
                   class="form-control @error('nomor') is-invalid @enderror">
@@ -75,8 +91,9 @@
                   </div>
                 @enderror
               </div>
+            </div>
 
-
+            <div class="col">
               <div class="form-group">
                 <label for="password">Kata Sandi</label>
                 <input id="password" type="password" name="password"
@@ -88,7 +105,6 @@
                   </div>
                 @enderror
               </div>
-
               <button class="btn btn-primary float-right" type="submit">Tambah</button>
             </div>
 

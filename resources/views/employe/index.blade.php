@@ -27,6 +27,7 @@
                       <th>Nama</th>
                       <th>Nama Pengguna</th>
                       <th>Alamat</th>
+                      <th>Kecamatan</th>
                       <th>Nomor</th>
                       <th>Nomor HP</th>
                       <th>Aksi</th>
@@ -67,6 +68,7 @@
       ajax: '{{ route('employes.index') }}',
       columns: [{
           searchable: false,
+          orderable: false,
           class: 'text-center',
           data: 'DT_RowIndex'
         },
@@ -78,6 +80,9 @@
         },
         {
           data: 'alamat'
+        },
+        {
+          data: 'kecamatan'
         },
         {
           data: 'nomor'

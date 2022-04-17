@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Employe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,9 @@ class EmployeController extends Controller
                         <i class="fa fa-trash"></i>
                     </span>
                 </form>';
-            })->make(true);
+            })->addColumn('kecamatan', function (Employe $employe) {
+                return $employe->district->kecamatan;
+            })->rawColumns(['action'])->make(true);
         }
 
         return view('employe.index');
@@ -33,7 +36,8 @@ class EmployeController extends Controller
 
     public function create()
     {
-        return view('employe.create');
+        $districts = District::all();
+        return view('employe.create', compact('districts'));
     }
 
 
@@ -47,6 +51,7 @@ class EmployeController extends Controller
                 'alamat' => 'required',
                 'nomor' => 'required',
                 'password' => 'required',
+                'id_kecamatan' => 'required'
             ]
         );
 
@@ -60,14 +65,10 @@ class EmployeController extends Controller
         return redirect(route('employes.index'))->with('error', 'Terjadi kesalahan ketika menambahkan data');
     }
 
-    public function show(Employe $employe)
-    {
-        //
-    }
-
     public function edit(Employe $employe)
     {
-        return view('employe.edit', compact('employe'));
+        $districts = District::all();
+        return view('employe.edit', compact('employe', 'districts'));
     }
 
     public function update(Request $request, Employe $employe)
@@ -79,6 +80,7 @@ class EmployeController extends Controller
             'alamat' => 'required',
             'nomor' => 'required',
             'password' => '',
+            'id_kecamatan' => 'required'
         ]);
 
         if (!$request->password) {

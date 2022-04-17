@@ -8,10 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Employe extends Authenticatable
 {
+    use SoftDeletes;
+    use HasFactory;
+
     protected $guarded = ['id'];
     protected $table = 'karyawan';
 
-
-    use SoftDeletes;
-    use HasFactory;
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'id_kecamatan');
+    }
 }
