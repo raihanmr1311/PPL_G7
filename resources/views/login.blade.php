@@ -59,7 +59,7 @@
         </div>
         <div
           class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
-          data-background="https://picsum.photos/1635/2181?random=1">
+          data-background="https://picsum.photos/1080/1920?random=1">
         </div>
       </div>
     </section>
