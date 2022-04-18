@@ -12,7 +12,7 @@ class EmployeController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Employe::all();
+        $data = Employe::with('district')->select('karyawan.*');
 
         if ($request->ajax()) {
             return Datatables::of($data)->addIndexColumn()->addColumn('action', function (Employe $employe) {

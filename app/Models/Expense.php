@@ -5,12 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Income extends Model
+class Expense extends Model
 {
-    protected $table = 'pemasukan';
-    protected $guarded = ['id'];
-
     use HasFactory;
+
+    protected $guarded = ['id'];
+    protected $table = 'pengeluaran';
+
+    public function details()
+    {
+        return $this->hasMany(ExpenseDetail::class, 'id_pengeluaran');
+    }
 
     public function employe()
     {

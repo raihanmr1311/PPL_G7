@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pemasukan', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('total_barang')->default(0);
-            $table->unsignedBigInteger('total_harga')->default(0);
-            $table->timestamps();
+        Schema::table('detail_pengeluaran', function (Blueprint $table) {
+            $table->after('id', function ($table) {
+                $table->foreignId('id_pengeluaran')->constrained('pengeluaran')->cascadeOnUpdate()->cascadeOnDelete();
+            });
         });
     }
 
@@ -28,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pemasukan');
+        Schema::table('detail_pengeluaran', function (Blueprint $table) {
+            //
+        });
     }
 };

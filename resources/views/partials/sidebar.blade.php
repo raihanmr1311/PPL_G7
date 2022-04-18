@@ -14,28 +14,34 @@
     </li>
 
 
-    <li class="dropdown">
+    <li class="dropdown {{ request()->routeIs('incomes.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fa-dollar-sign"></i> <span>Pemasukan</span></a>
       <ul class="dropdown-menu">
-        <li><a class="nav-link" href="">Data Pemasukan</a></li>
-        <li><a class="nav-link" href="">Tambah Pemasukan</a></li>
+        <li><a class="nav-link {{ request()->routeIs('incomes.index') ? 'active' : '' }}"
+            href="{{ route('incomes.index') }}">Data Pemasukan</a></li>
+        <li><a class="nav-link {{ request()->routeIs('incomes.create') ? 'active' : '' }}"
+            href="{{ route('incomes.create') }}">Tambah Pemasukan</a></li>
       </ul>
     </li>
 
-    <li class="dropdown">
-      <a href="" class="nav-link has-dropdown"><i class="fas fa-cart-plus"></i> <span>Pengeluaran</span></a>
+
+    <li class="dropdown {{ request()->routeIs('expenses.*') ? 'active' : '' }}">
+      <a href="" class="nav-link has-dropdown"><i class="fas fas fa-cart-plus"></i> <span>Pengeluaran</span></a>
       <ul class="dropdown-menu">
-        <li><a class="nav-link" href="">Data Pengeluaran</a></li>
-        <li><a class="nav-link" href="">Tambah Pengeluaran</a></li>
+        <li class="{{ request()->routeIs('expenses.index') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('expenses.index') }}">Data Pengeluaran</a></li>
+        <li class="{{ request()->routeIs('expenses.create') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('expenses.create') }}">Tambah Pengeluaran</a></li>
       </ul>
     </li>
-
 
     <li class="dropdown {{ request()->routeIs('items.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fa-industry"></i> <span>Barang</span></a>
       <ul class="dropdown-menu">
-        <li class="{{ request()->routeIs('items.index') ? 'active' : '' }}"><a class="nav-link" href="{{route('items.index')}}">Data Barang</a></li>
-        <li class="{{ request()->routeIs('items.create') ? 'active' : '' }}"><a class="nav-link" href="{{route('items.create')}}">Tambah Barang</a></li>
+        <li class="{{ request()->routeIs('items.index') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('items.index') }}">Data Barang</a></li>
+        <li class="{{ request()->routeIs('items.create') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('items.create') }}">Tambah Barang</a></li>
       </ul>
     </li>
 
@@ -44,8 +50,10 @@
     <li class="dropdown {{ request()->routeIs('employes.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Karyawan</span></a>
       <ul class="dropdown-menu">
-        <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}"><a class="nav-link" href="{{route('employes.index')}}">Data Karyawan</a></li>
-        <li class="{{ request()->routeIs('employes.create') ? 'active' : '' }}"><a class="nav-link" href="{{route('employes.create')}}">Tambah Karyawan</a></li>
+        <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('employes.index') }}">Data Karyawan</a></li>
+        <li class="{{ request()->routeIs('employes.create') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('employes.create') }}">Tambah Karyawan</a></li>
       </ul>
     </li>
   </ul>

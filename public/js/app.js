@@ -40,6 +40,8 @@ __webpack_require__(/*! datatables.net-responsive-bs4 */ "./node_modules/datatab
 
 __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
 
+__webpack_require__(/*! bootstrap-daterangepicker */ "./node_modules/bootstrap-daterangepicker/daterangepicker.js");
+
 window.Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 window.iziToast = __webpack_require__(/*! izitoast */ "./node_modules/izitoast/dist/js/iziToast.js");
 
@@ -662,7 +664,8 @@ $(function () {
         locale: {
           format: 'YYYY-MM-DD'
         },
-        singleDatePicker: true
+        singleDatePicker: true,
+        autoApply: true
       });
     }
 

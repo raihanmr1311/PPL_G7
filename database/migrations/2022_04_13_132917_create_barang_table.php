@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->softDeletes();
             $table->string('nama', 32);
-            $table->unsignedBigInteger('harga');
+            $table->unsignedBigInteger('harga')->default(0);
         });
     }
 

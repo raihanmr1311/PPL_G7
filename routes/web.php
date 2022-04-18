@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('employes', EmployeController::class)->except(['show']);
     Route::resource('items', ItemController::class)->except(['show']);
+    Route::resource('incomes', IncomeController::class);
+    Route::resource('expenses', ExpenseController::class);
 
     Route::view('/', 'dashboard')->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

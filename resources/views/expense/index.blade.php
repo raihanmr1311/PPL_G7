@@ -5,7 +5,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Data Karyawan</h1>
+      <h1>Data Pengeluaran</h1>
     </div>
 
     <div class="section-body">
@@ -13,8 +13,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="{{ route('employes.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah data
-                karyawan</a>
+              <a href="{{route('expenses.create')}}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah Pengeluaran</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -24,12 +23,10 @@
                       <th class="text-center">
                         #
                       </th>
-                      <th>Nama</th>
-                      <th>Nama Pengguna</th>
-                      <th>Alamat</th>
-                      <th>Kecamatan</th>
-                      <th>Nomor</th>
-                      <th>Nomor HP</th>
+                      <th>Karyawan</th>
+                      <th>Total Barang</th>
+                      <th>Total Harga</th>
+                      <th>Tanggal</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -43,6 +40,21 @@
       </div>
     </div>
   </section>
+
+  <form class="modal-part" id="modal_create" method="POST" action="{{ route('expenses.store') }}">
+    @csrf
+    <div class="form-group">
+      <label for="tanggal">Tanggal</label>
+      <input id="tanggal" value="{{ old('tanggal') }}" type="text" name="tanggal"
+        class="form-control datepicker @error('tanggal') is-invalid @enderror">
+
+      @error('tanggal')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+      @enderror
+    </div>
+  </form>
 @endsection
 
 
@@ -50,6 +62,24 @@
 
 @push('javascript')
   <script>
+    $("#modal_btn").fireModal({
+      title: 'Tambah data pengeluaran',
+      body: $("#modal_create"),
+      footerClass: 'bg-whitesmoke',
+      autoFocus: false,
+      onFormSubmit: function(modal, e, form) {},
+      shown: function(modal, form) {
+        console.log(form)
+      },
+      buttons: [{
+        text: 'Tambah',
+        submit: true,
+        class: 'btn btn-primary btn-shadow',
+        handler: function(modal) {}
+      }]
+    });
+
+
     @if ($message = Session::get('success'))
       iziToast.success({
       title: '{{ $message }}',
@@ -64,32 +94,26 @@
     $("#table-1").dataTable({
       processing: true,
       serverSide: true,
-      order: [[0, 'desc']],
-      ajax: '{{ route('employes.index') }}',
+      order: [],
+      ajax: '{{ route('expenses.index') }}',
       columns: [{
-          searchable: false,
           orderable: false,
+          searchable: false,
           class: 'text-center',
           data: 'DT_RowIndex'
         },
         {
-          data: 'nama_lengkap'
+          data: 'karyawan',
+          name: 'employe.nama_lengkap'
         },
         {
-          data: 'nama_pengguna'
+          data: 'total_barang'
         },
         {
-          data: 'alamat'
+          data: 'total_harga'
         },
         {
-          data: 'kecamatan',
-          name: 'district.kecamatan'
-        },
-        {
-          data: 'nomor'
-        },
-        {
-          data: 'no_hp'
+          data: 'tanggal'
         },
         {
           searchable: false,

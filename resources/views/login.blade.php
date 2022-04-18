@@ -19,7 +19,6 @@
             </h4>
             <p class="text-muted">Silahkan login untuk masuk ke menu admin.</p>
             <form method="POST" action="{{ route('login') }}">
-              @csrf
               @error('authError')
               <div class="alert alert-danger">
                   Kredesial yang diberikan tidak ditemukan

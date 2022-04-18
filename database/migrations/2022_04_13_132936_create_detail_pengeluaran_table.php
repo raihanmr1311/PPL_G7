@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('detail_pengeluaran', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('kuantitas');
-            $table->unsignedBigInteger('harga');
+            $table->unsignedBigInteger('harga')->default(0);
         });
     }
 

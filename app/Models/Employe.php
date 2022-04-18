@@ -18,4 +18,9 @@ class Employe extends Authenticatable
     {
         return $this->belongsTo(District::class, 'id_kecamatan');
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'id_karyawan');
+    }
 }

@@ -5,7 +5,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Data Karyawan</h1>
+      <h1>Data Pemasukan</h1>
     </div>
 
     <div class="section-body">
@@ -13,7 +13,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="{{ route('employes.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah data
+              <a href="{{ route('incomes.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah data
                 karyawan</a>
             </div>
             <div class="card-body">
@@ -24,12 +24,10 @@
                       <th class="text-center">
                         #
                       </th>
-                      <th>Nama</th>
-                      <th>Nama Pengguna</th>
-                      <th>Alamat</th>
-                      <th>Kecamatan</th>
-                      <th>Nomor</th>
-                      <th>Nomor HP</th>
+                      <th>Karyawan</th>
+                      <th>Total Barang</th>
+                      <th>Total Pemasukan</th>
+                      <th>Tanggal Dibuat</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -64,32 +62,26 @@
     $("#table-1").dataTable({
       processing: true,
       serverSide: true,
-      order: [[0, 'desc']],
-      ajax: '{{ route('employes.index') }}',
+      order: [
+        [0, 'desc']
+      ],
+      ajax: '{{ route('incomes.index') }}',
       columns: [{
           searchable: false,
-          orderable: false,
           class: 'text-center',
           data: 'DT_RowIndex'
         },
         {
-          data: 'nama_lengkap'
+          data: 'karyawan'
         },
         {
-          data: 'nama_pengguna'
+          data: 'total_barang'
         },
         {
-          data: 'alamat'
+          data: 'total_harga'
         },
         {
-          data: 'kecamatan',
-          name: 'district.kecamatan'
-        },
-        {
-          data: 'nomor'
-        },
-        {
-          data: 'no_hp'
+          data: 'created_at'
         },
         {
           searchable: false,

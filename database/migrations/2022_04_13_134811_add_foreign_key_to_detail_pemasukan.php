@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('detail_pemasukan', function (Blueprint $table) {
 
             $table->after('id', function ($table) {
-                $table->foreignId('id_pemasukan')->constrained('pemasukan')->cascadeOnUpdate()->restrictOnDelete();
+                $table->foreignId('id_pemasukan')->constrained('pemasukan')->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('id_barang')->constrained('barang')->cascadeOnUpdate()->restrictOnDelete();
             });
         });
