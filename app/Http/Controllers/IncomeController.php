@@ -10,7 +10,8 @@ class IncomeController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Income::all();
+        $data = Income::with('employe')->select('pemasukan.*');
+
 
         if ($request->ajax()) {
             return Datatables::of($data)->addIndexColumn()->addColumn('action', function (Income $income) {
@@ -23,6 +24,7 @@ class IncomeController extends Controller
                     <span onclick=confirmDelete(deleteForm' . $income->id . ') class="ml-1 btn btn-action btn-danger btnDelete">
                         <i class="fa fa-trash"></i>
                     </span>
+                    <a href=' . route('incomes.show', $income->id) . ' class="ml-1 btn btn-icon btn-primary">Detail</a>
                 </form>';
             })->addColumn('karyawan', function (Income $income) {
                 return $income->employe->nama_lengkap;
@@ -37,59 +39,49 @@ class IncomeController extends Controller
         return view('income.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate(['tanggal' => 'required']);
+
+        $data['id_karyawan'] = auth()->user()->id;
+
+        if (Income::create($data)) {
+            return redirect(route('incomes.index'))->with('success', 'Data berhasil ditambahkan');
+        }
+
+        return redirect(route('incomes.index'))->with('error', 'Terjadi kesalahan ketika menambahkan data');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Income $income)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Income $income)
     {
-        //
+        return view('income.edit', compact('income'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Income $income)
     {
-        //
+        $data = $request->validate(['tanggal' => 'required']);
+
+        if ($income->update($data)) {
+            return redirect(route('incomes.index'))->with('success', 'Data berhasil diubah');
+        }
+
+        return redirect(route('incomes.index'))->with('error', 'Terjadi kesalahan ketika mengubah data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Income $income)
     {
-        //
+        if ($income->delete()) {
+            return redirect(route('incomes.index'))->with('success', 'Data berhasil dihapus');
+        }
+
+        return redirect(route('incomes.index'))->with('error', 'Terjadi kesalahan ketika menghapus data');
     }
 }

@@ -13,8 +13,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="{{ route('incomes.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah data
-                karyawan</a>
+              <a href="{{ route('incomes.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah Data Pemasukan</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -25,9 +24,9 @@
                         #
                       </th>
                       <th>Karyawan</th>
+                      <th>Tanggal</th>
                       <th>Total Barang</th>
                       <th>Total Pemasukan</th>
-                      <th>Tanggal Dibuat</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -62,12 +61,10 @@
     $("#table-1").dataTable({
       processing: true,
       serverSide: true,
-      order: [
-        [0, 'desc']
-      ],
       ajax: '{{ route('incomes.index') }}',
       columns: [{
           searchable: false,
+          orderable: false,
           class: 'text-center',
           data: 'DT_RowIndex'
         },
@@ -75,13 +72,13 @@
           data: 'karyawan'
         },
         {
+          data: 'tanggal'
+        },
+        {
           data: 'total_barang'
         },
         {
           data: 'total_harga'
-        },
-        {
-          data: 'created_at'
         },
         {
           searchable: false,
