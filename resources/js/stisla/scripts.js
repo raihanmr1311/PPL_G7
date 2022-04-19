@@ -585,6 +585,7 @@ $(function() {
       $('.datepicker').daterangepicker({
         locale: {format: 'YYYY-MM-DD'},
         singleDatePicker: true,
+        maxDate: new Date(),
         autoApply: true
       });
     }

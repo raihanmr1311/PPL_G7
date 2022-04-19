@@ -665,6 +665,7 @@ $(function () {
           format: 'YYYY-MM-DD'
         },
         singleDatePicker: true,
+        maxDate: new Date(),
         autoApply: true
       });
     }
