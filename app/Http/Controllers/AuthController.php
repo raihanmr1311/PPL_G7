@@ -15,7 +15,7 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt(['nama_pengguna' => $credentials['nama_pengguna'], 'password' => $credentials['password']], $request->remember_me)) {
+        if (Auth::attempt(['nama_pengguna' => $credentials['nama_pengguna'], 'password' => $credentials['password']], true)) {
             return redirect()->intended();
         } else {
             throw ValidationException::withMessages([

@@ -38,13 +38,6 @@
                   required>
               </div>
 
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" name="remember_me" class="custom-control-input" tabindex="3" id="remember-me">
-                  <label class="custom-control-label" for="remember-me">Ingat Saya</label>
-                </div>
-              </div>
-
               <div class="form-group text-right">
                 <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                   Masuk
