@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\ExpenseView;
+use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -10,11 +12,10 @@ class ExpenseController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Expense::with('employe')->select('pengeluaran.*');
-
+        $data = ExpenseView::all();
 
         if ($request->ajax()) {
-            return Datatables::of($data)->addIndexColumn()->addColumn('action', function (Expense $expense) {
+            return Datatables::of($data)->addIndexColumn()->addColumn('action', function (ExpenseView $expense) {
                 return
                     '<form id="deleteForm' . $expense->id . '" class="d-inline d-flex" action="' . route('expenses.destroy', $expense->id) . '"method="POST">
 
@@ -26,8 +27,6 @@ class ExpenseController extends Controller
                     </span>
                     <a href=' . route('expenses.show', $expense->id) . ' class="ml-1 btn btn-icon btn-primary">Detail</a>
                 </form>';
-            })->addColumn('karyawan', function (Expense $expense) {
-                return $expense->employe->nama_lengkap;
             })->make(true);
         }
 
@@ -41,15 +40,36 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate(['tanggal' => 'required']);
+        $detail = [];
+
+        $data = $request->validate([
+            'tanggal' => 'required',
+            'pengeluaran' => 'required|array|min:1|max:10',
+            'pengeluaran.*' => 'required|string',
+            'kuantitas' => 'required|array|min:1|max:10',
+            'kuantitas.*' => 'required|numeric',
+            'harga' => 'required|array|min:1|max:10',
+            'harga.*' => 'required|numeric',
+        ]);
+
+        for ($i = 0; $i < count($data['pengeluaran']); $i++) {
+            $tempData['pengeluaran'] = $data['pengeluaran'][$i];
+            $tempData['kuantitas'] = $data['kuantitas'][$i];
+            $tempData['harga'] = $data['harga'][$i];
+            array_push($detail, $tempData);
+        }
+
 
         $data['id_karyawan'] = auth()->user()->id;
 
-        if (Expense::create($data)) {
+        try {
+            $expense = Expense::create($data);
+            $expense->details()->createMany($detail);
             return redirect(route('expenses.index'))->with('success', 'Data berhasil ditambahkan');
+        } catch (Exception $e) {
+            return $e;
+            return redirect(route('expenses.index'))->with('error', 'Terjadi kesalahan ketika menambahkan data');
         }
-
-        return redirect(route('expenses.index'))->with('error', 'Terjadi kesalahan ketika menambahkan data');
     }
 
     public function show(Expense $expense)

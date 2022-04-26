@@ -13,7 +13,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="{{route('expenses.create')}}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah Pengeluaran</a>
+              <a href="{{ route('expenses.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah
+                Pengeluaran</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -86,7 +87,7 @@
       position: 'topRight',
       });
     @elseif($message = Session::get('error'))
-      iziToast.success({
+      iziToast.error({
       title: '{{ $message }}',
       position: 'topRight',
       });
@@ -104,7 +105,6 @@
         },
         {
           data: 'karyawan',
-          name: 'employe.nama_lengkap'
         },
         {
           data: 'total_barang'

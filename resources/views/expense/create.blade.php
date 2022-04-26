@@ -25,43 +25,46 @@
                 @enderror
 
               </div>
+              <div class="form-group">
+                <label for="">Detail Pengeluaran</label>
 
-              <div id="input_container">
-                <div class="row">
-                  <div class="form-group col-xl-4">
-                    <input placeholder="Pengeluaran" id="tanggal" value="{{ old('pengeluaran[]') }}" type="text"
-                      name="pengeluaran[]" class="form-control @error('pengeluaran[]') is-invalid @enderror">
-                    @error('pengeluaran[]')
-                      <div class="invalid-feedback">
-                        {{ $message }}
-                      </div>
-                    @enderror
+                <div id="input_container">
+                  <div class="row">
+                    <div class="form-group col-xl-4">
+                      <input placeholder="Pengeluaran" id="tanggal" value="{{ old('pengeluaran[]') }}" type="text"
+                        name="pengeluaran[]" class="form-control @error('pengeluaran[]') is-invalid @enderror">
+                      @error('pengeluaran[]')
+                        <div class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+
+                    <div class="form-group col-xl-2">
+                      <input placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
+                        name="kuantitas[]" class="form-control @error('kuantitas[]') is-invalid @enderror">
+                      @error('kuantitas[]')
+                        <div class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+
+                    <div class="form-group col-xl-4">
+                      <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
+                        class="form-control @error('harga[]') is-invalid @enderror">
+                      @error('harga[]')
+                        <div class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+
+                    <div class="form-group col-xl-2">
+                      <a class="btn btn-success" href="javascript:void(0);" id="add_button" title="Add field">TAMBAH</a>
+                    </div>
+
                   </div>
-
-                  <div class="form-group col-xl-2">
-                    <input placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
-                      name="kuantitas[]" class="form-control @error('kuantitas[]') is-invalid @enderror">
-                    @error('kuantitas[]')
-                      <div class="invalid-feedback">
-                        {{ $message }}
-                      </div>
-                    @enderror
-                  </div>
-
-                  <div class="form-group col-xl-4">
-                    <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
-                      class="form-control @error('harga[]') is-invalid @enderror">
-                    @error('harga[]')
-                      <div class="invalid-feedback">
-                        {{ $message }}
-                      </div>
-                    @enderror
-                  </div>
-
-                  <div class="form-group col-xl-2">
-                    <a class="btn btn-success" href="javascript:void(0);" id="add_button" title="Add field">TAMBAH</a>
-                  </div>
-
                 </div>
               </div>
 
