@@ -14,34 +14,32 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('DROP VIEW IF EXISTS expenses_view;');
-
+        DB::statement('DROP VIEW IF EXISTS incomes_view;');
         DB::statement(
-            'CREATE VIEW expenses_view
+            'CREATE VIEW incomes_view
             AS
             SELECT
-                pengeluaran.id AS id,
+                pemasukan.id AS id,
                 karyawan.nama_lengkap AS karyawan,
-                pengeluaran.tanggal AS tanggal,
+                pemasukan.tanggal AS tanggal,
                 IFNULL(
-                    SUM(detail_pengeluaran.kuantitas),
+                    SUM(detail_pemasukan.kuantitas),
                     0
                 ) AS total_barang,
                 IFNULL(
                     SUM(
-                        detail_pengeluaran.harga * detail_pengeluaran.kuantitas
+                        detail_pemasukan.harga * detail_pemasukan.kuantitas
                     ),
                     0
                 ) AS total_harga,
-                pengeluaran.created_at AS created_at,
-                pengeluaran.updated_at AS updated_at
+                pemasukan.created_at AS created_at,
+                pemasukan.updated_at AS updated_at
                 FROM
-                    pengeluaran
-                INNER JOIN karyawan ON pengeluaran.id_karyawan = karyawan.id
-                LEFT JOIN detail_pengeluaran ON pengeluaran.id = detail_pengeluaran.id_pengeluaran
+                    pemasukan
+                INNER JOIN karyawan ON pemasukan.id_karyawan = karyawan.id
+                LEFT JOIN detail_pemasukan ON pemasukan.id = detail_pemasukan.id_pemasukan
                 GROUP BY
-                    pengeluaran.id;
-            '
+                    pemasukan.id;'
         );
     }
 
@@ -52,6 +50,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::statement('DROP VIEW IF EXISTS expenses_view;');
+        DB::statement('DROP VIEW IF EXISTS incomes_view;');
     }
 };

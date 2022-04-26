@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Income;
+use App\Models\IncomeView;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -10,11 +11,11 @@ class IncomeController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Income::with('employe')->select('pemasukan.*');
+        $data = IncomeView::all();
 
 
         if ($request->ajax()) {
-            return Datatables::of($data)->addIndexColumn()->addColumn('action', function (Income $income) {
+            return Datatables::of($data)->addIndexColumn()->addColumn('action', function (IncomeView $income) {
                 return
                     '<form id="deleteForm' . $income->id . '" class="d-inline d-flex" action="' . route('incomes.destroy', $income->id) . '"method="POST">
 
@@ -26,8 +27,6 @@ class IncomeController extends Controller
                     </span>
                     <a href=' . route('incomes.show', $income->id) . ' class="ml-1 btn btn-icon btn-primary">Detail</a>
                 </form>';
-            })->addColumn('karyawan', function (Income $income) {
-                return $income->employe->nama_lengkap;
             })->make(true);
         }
 

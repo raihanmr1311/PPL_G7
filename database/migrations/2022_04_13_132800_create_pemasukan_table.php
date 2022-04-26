@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('pemasukan', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->unsignedInteger('total_barang')->default(0);
-            $table->unsignedBigInteger('total_harga')->default(0);
             $table->timestamps();
         });
     }
