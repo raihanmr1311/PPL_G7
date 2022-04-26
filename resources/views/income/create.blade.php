@@ -5,7 +5,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Tambah Pengeluaran</h1>
+      <h1>Tambah Pemasukan</h1>
     </div>
     <div class="section-body">
       <div class="card">
