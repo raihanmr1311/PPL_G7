@@ -53,7 +53,7 @@
       position: 'topRight',
       });
     @elseif($message = Session::get('error'))
-      iziToast.success({
+      iziToast.error({
       title: '{{ $message }}',
       position: 'topRight',
       });

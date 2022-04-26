@@ -9,6 +9,8 @@ class IncomeDetail extends Model
 {
     protected $table = 'detail_pemasukan';
     protected $guarded = ['id'];
+    public $timestamps = false;
+
 
     use HasFactory;
 }

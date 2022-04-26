@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Income;
 use App\Models\IncomeView;
+use App\Models\Item;
+use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -35,20 +37,42 @@ class IncomeController extends Controller
 
     public function create()
     {
-        return view('income.create');
+        $items = Item::all();
+        return view('income.create', compact('items'));
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate(['tanggal' => 'required']);
+        $detail = [];
+
+        $data = $request->validate([
+            'tanggal' => 'required',
+            'id_barang' => 'required|array|min:1|max:10',
+            'id_barang.*' => 'required|string',
+            'kuantitas' => 'required|array|min:1|max:10',
+            'kuantitas.*' => 'required|numeric',
+            'harga' => 'required|array|min:1|max:10',
+            'harga.*' => 'required|numeric',
+        ]);
+
+        for ($i = 0; $i < count($data['id_barang']); $i++) {
+            $tempData['id_barang'] = $data['id_barang'][$i];
+            $tempData['kuantitas'] = $data['kuantitas'][$i];
+            $tempData['harga'] = $data['harga'][$i];
+            array_push($detail, $tempData);
+        }
+
 
         $data['id_karyawan'] = auth()->user()->id;
 
-        if (Income::create($data)) {
+        try {
+            $income = Income::create($data);
+            $income->details()->createMany($detail);
             return redirect(route('incomes.index'))->with('success', 'Data berhasil ditambahkan');
+        } catch (Exception $e) {
+            return $e;
+            return redirect(route('incomes.index'))->with('error', 'Terjadi kesalahan ketika menambahkan data');
         }
-
-        return redirect(route('incomes.index'))->with('error', 'Terjadi kesalahan ketika menambahkan data');
     }
 
 

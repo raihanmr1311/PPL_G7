@@ -16,4 +16,9 @@ class Income extends Model
     {
         return $this->belongsTo(Employe::class, 'id_karyawan');
     }
+
+    public function details()
+    {
+        return $this->hasMany(IncomeDetail::class, 'id_pemasukan');
+    }
 }
