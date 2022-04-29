@@ -21,6 +21,8 @@
             href="{{ route('incomes.index') }}">Data Pemasukan</a></li>
         <li class="{{ request()->routeIs('incomes.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('incomes.create') }}">Tambah Pemasukan</a></li>
+        <li class="{{ request()->routeIs('incomes.statistic') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('incomes.statistic') }}">Statistik Pemasukan</a></li>
       </ul>
     </li>
 
@@ -32,6 +34,8 @@
             href="{{ route('expenses.index') }}">Data Pengeluaran</a></li>
         <li class="{{ request()->routeIs('expenses.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('expenses.create') }}">Tambah Pengeluaran</a></li>
+        <li class="{{ request()->routeIs('expenses.statistic') ? 'active' : '' }}"><a class="nav-link"
+            href="{{ route('expenses.statistic') }}">Statistik Pengeluaran</a></li>
       </ul>
     </li>
 
