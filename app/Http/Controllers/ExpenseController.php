@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\ExpenseDetail;
 use App\Models\ExpenseView;
+use App\Models\Wallet;
 use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -66,6 +67,7 @@ class ExpenseController extends Controller
         try {
             $expense = Expense::create($data);
             $expense->details()->createMany($detail);
+            Wallet::decreaseBalance($expense->total_harga);
             return redirect(route('expenses.index'))->with('success', 'Data berhasil ditambahkan');
         } catch (Exception $e) {
             return $e;
@@ -121,6 +123,7 @@ class ExpenseController extends Controller
 
     public function destroy(Expense $expense)
     {
+        Wallet::decreaseBalance($expense->total_harga);
         if ($expense->delete()) {
             return redirect(route('expenses.index'))->with('success', 'Data berhasil dihapus');
         }

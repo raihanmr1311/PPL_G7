@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Expense extends Model
 {
@@ -11,6 +12,7 @@ class Expense extends Model
 
     protected $guarded = ['id'];
     protected $table = 'pengeluaran';
+    protected $appends = ['total_harga'];
 
     public function details()
     {
@@ -20,5 +22,11 @@ class Expense extends Model
     public function employe()
     {
         return $this->belongsTo(Employe::class, 'id_karyawan');
+    }
+
+    public function getTotalHargaAttribute()
+    {
+
+        return $this->details()->sum(DB::raw('detail_pengeluaran.harga * detail_pengeluaran.kuantitas'));
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Income;
 use App\Models\IncomeDetail;
 use App\Models\IncomeView;
 use App\Models\Item;
+use App\Models\Wallet;
 use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -69,6 +70,7 @@ class IncomeController extends Controller
         try {
             $income = Income::create($data);
             $income->details()->createMany($detail);
+            Wallet::increaseBalance($income->total_harga);
             return redirect(route('incomes.index'))->with('success', 'Data berhasil ditambahkan');
         } catch (Exception $e) {
             return $e;
@@ -127,6 +129,7 @@ class IncomeController extends Controller
 
     public function destroy(Income $income)
     {
+        Wallet::decreaseBalance($income->total_harga);
         if ($income->delete()) {
             return redirect(route('incomes.index'))->with('success', 'Data berhasil dihapus');
         }
