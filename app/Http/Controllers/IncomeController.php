@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Income;
+use App\Models\IncomeDetail;
 use App\Models\IncomeView;
 use App\Models\Item;
 use Exception;
@@ -84,19 +85,44 @@ class IncomeController extends Controller
 
     public function edit(Income $income)
     {
-        return view('income.edit', compact('income'));
+        $items = Item::all();
+        return view('income.edit', compact('income', 'items'));
     }
 
 
     public function update(Request $request, Income $income)
     {
-        $data = $request->validate(['tanggal' => 'required']);
 
-        if ($income->update($data)) {
-            return redirect(route('incomes.index'))->with('success', 'Data berhasil diubah');
+        if ($request->has('deleteId')) {
+            IncomeDetail::destroy($request->deleteId);
         }
 
-        return redirect(route('incomes.index'))->with('error', 'Terjadi kesalahan ketika mengubah data');
+        $detail = [];
+
+        $data = $request->validate([
+            'tanggal' => 'required',
+            'id_barang' => 'required|array|min:1|max:10',
+            'id_barang.*' => 'required|string',
+            'kuantitas' => 'required|array|min:1|max:10',
+            'kuantitas.*' => 'required|numeric',
+            'id' => '',
+            'harga' => 'required|array|min:1|max:10',
+            'harga.*' => 'required|numeric',
+        ]);
+
+
+        for ($i = 0; $i < count($data['id_barang']); $i++) {
+            $tempData['id'] = $data['id'][$i];
+            $tempData['id_barang'] = $data['id_barang'][$i];
+            $tempData['kuantitas'] = $data['kuantitas'][$i];
+            $tempData['harga'] = $data['harga'][$i];
+            $tempData['id_pemasukan'] = $income->id;
+            array_push($detail, $tempData);
+        }
+
+        $income->update(['tanggal' => $data['tanggal']]);
+        IncomeDetail::upsert($detail, ['id'], ['id_barang', 'kuantitas', 'harga']);
+        return redirect(route('incomes.index'))->with('success', 'Data berhasil diubah');
     }
 
     public function destroy(Income $income)
