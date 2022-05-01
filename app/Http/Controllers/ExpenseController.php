@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\ExpenseDetail;
 use App\Models\ExpenseView;
 use Exception;
 use Illuminate\Http\Request;
@@ -84,13 +85,38 @@ class ExpenseController extends Controller
 
     public function update(Request $request, Expense $expense)
     {
-        $data = $request->validate(['tanggal' => 'required']);
-
-        if ($expense->update($data)) {
-            return redirect(route('expenses.index'))->with('success', 'Data berhasil diubah');
+        if ($request->has('deleteId')) {
+            ExpenseDetail::destroy($request->deleteId);
         }
 
-        return redirect(route('expenses.index'))->with('error', 'Terjadi kesalahan ketika mengubah data');
+        $detail = [];
+
+        $data = $request->validate([
+            'tanggal' => 'required',
+            'pengeluaran' => 'required|array|min:1|max:10',
+            'pengeluaran.*' => 'required|string',
+            'kuantitas' => 'required|array|min:1|max:10',
+            'id' => '',
+            'kuantitas.*' => 'required|numeric',
+            'harga' => 'required|array|min:1|max:10',
+            'harga.*' => 'required|numeric',
+        ]);
+
+
+        for ($i = 0; $i < count($data['pengeluaran']); $i++) {
+            $tempData['id'] = $data['id'][$i];
+            $tempData['pengeluaran'] = $data['pengeluaran'][$i];
+            $tempData['kuantitas'] = $data['kuantitas'][$i];
+            $tempData['harga'] = $data['harga'][$i];
+            $tempData['id_pengeluaran'] = $expense->id;
+            array_push($detail, $tempData);
+        }
+
+        $expense->update(['tanggal' => $data['tanggal']]);
+        ExpenseDetail::upsert($detail, ['id'], ['pengeluaran', 'kuantitas', 'harga']);
+        return redirect(route('expenses.index'))->with('success', 'Data berhasil diubah');
+
+        // return redirect(route('expenses.index'))->with('error', 'Terjadi kesalahan ketika mengubah data');
     }
 
     public function destroy(Expense $expense)
