@@ -5,7 +5,7 @@
 </form>
 <ul class="navbar-nav navbar-right">
   <li class="dropdown">
-    <div id="liveMoney" class="text-white pt-lg-1">Rp.</div>
+    <div id="liveMoney" class="text-white pt-lg-1">Rp</div>
   </li>
   <li class="dropdown"><a href="#" data-toggle="dropdown"
       class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -32,7 +32,7 @@
 
     async function changeHtmlBalance() {
       var result = await getData();
-      $('#liveMoney').html(`Rp. ${result.data.balance}`);
+      $('#liveMoney').html(`Rp${result.data.balance}`);
       setTimeout(changeHtmlBalance, 5000);
     }
 
