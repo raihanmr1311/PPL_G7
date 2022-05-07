@@ -17,7 +17,7 @@
     <li class="dropdown {{ request()->routeIs('incomes.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fa-dollar-sign"></i> <span>Pemasukan</span></a>
       <ul class="dropdown-menu">
-        <li class="{{ request()->routeIs('incomes.index') ? 'active' : '' }}"><a class="nav-link"
+        <li class="{{ request()->routeIs('incomes.index') || request()->routeIs('incomes.show') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('incomes.index') }}">Data Pemasukan</a></li>
         <li class="{{ request()->routeIs('incomes.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('incomes.create') }}">Tambah Pemasukan</a></li>
@@ -30,7 +30,7 @@
     <li class="dropdown {{ request()->routeIs('expenses.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fas fa-cart-plus"></i> <span>Pengeluaran</span></a>
       <ul class="dropdown-menu">
-        <li class="{{ request()->routeIs('expenses.index') ? 'active' : '' }}"><a class="nav-link"
+        <li class="{{ request()->routeIs('expenses.index') || request()->routeIs('expenses.show') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('expenses.index') }}">Data Pengeluaran</a></li>
         <li class="{{ request()->routeIs('expenses.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('expenses.create') }}">Tambah Pengeluaran</a></li>

@@ -81,7 +81,7 @@ class IncomeController extends Controller
 
     public function show(Income $income)
     {
-        //
+        return view('income.show', compact('income'));
     }
 
 

@@ -77,7 +77,7 @@ class ExpenseController extends Controller
 
     public function show(Expense $expense)
     {
-        return view('expense.show');
+        return view('expense.show', compact('expense'));
     }
 
     public function edit(Expense $expense)

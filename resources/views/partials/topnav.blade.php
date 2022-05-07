@@ -32,7 +32,10 @@
 
     async function changeHtmlBalance() {
       var result = await getData();
-      $('#liveMoney').html(`Rp${result.data.balance}`);
+      $('#liveMoney').html(new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+      }).format(result.data.balance));
       setTimeout(changeHtmlBalance, 5000);
     }
 
