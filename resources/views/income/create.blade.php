@@ -31,7 +31,7 @@
                 <div id="input_container">
                   <div class="row">
                     <div class="form-group col-xl-4">
-                      <select class="form-control @error('id_barang[]') is-invalid @enderror" name="id_barang[]" id="">
+                      <select class="form-control @error('id_barang.*') is-invalid @enderror" name="id_barang[]" id="">
                         @foreach ($items as $item)
                           <option value="{{ $item->id }}">
                             {{ $item->nama }}
@@ -39,7 +39,7 @@
                         @endforeach
                       </select>
 
-                      @error('id_barang[]')
+                      @error('id_barang.*')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -49,8 +49,8 @@
 
                     <div class="form-group col-xl-2">
                       <input placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
-                        name="kuantitas[]" class="form-control @error('kuantitas[]') is-invalid @enderror">
-                      @error('kuantitas[]')
+                        name="kuantitas[]" class="form-control @error('kuantitas.*') is-invalid @enderror">
+                      @error('kuantitas.*')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -59,8 +59,8 @@
 
                     <div class="form-group col-xl-4">
                       <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
-                        class="form-control @error('harga[]') is-invalid @enderror">
-                      @error('harga[]')
+                        class="form-control @error('harga.*') is-invalid @enderror">
+                      @error('harga.*')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -74,7 +74,9 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-primary float-right" type="submit">Tambah</button>
+              <button class="btn btn-primary float-right" type="submit">Simpan</button>
+              <a href="{{ route('incomes.index') }}" class="btn btn-outline-primary mr-2 float-right"
+                type="submit">Batal</a>
             </div>
 
           </form>
@@ -92,7 +94,7 @@
     var fieldHTML = `
             <div class="row">
                 <div class="form-group col-xl-4">
-                    <select class="form-control @error('id_barang[]') is-invalid @enderror" name="id_barang[]" id="">
+                    <select class="form-control @error('id_barang.*') is-invalid @enderror" name="id_barang[]" id="">
                       @foreach ($items as $item)
                         <option value="{{ $item->id }}">
                           {{ $item->nama }}
@@ -100,7 +102,7 @@
                       @endforeach
                     </select>
 
-                    @error('id_barang[]')
+                    @error('id_barang.*')
                       <div class="invalid-feedback">
                         {{ $message }}
                       </div>
@@ -110,8 +112,8 @@
 
                 <div class="form-group col-xl-2">
                   <input placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
-                    name="kuantitas[]" class="form-control @error('kuantitas[]') is-invalid @enderror">
-                  @error('kuantitas[]')
+                    name="kuantitas[]" class="form-control @error('kuantitas.*') is-invalid @enderror">
+                  @error('kuantitas.*')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>
@@ -120,8 +122,8 @@
 
                 <div class="form-group col-xl-4">
                   <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
-                    class="form-control @error('harga[]') is-invalid @enderror">
-                  @error('harga[]')
+                    class="form-control @error('harga.*') is-invalid @enderror">
+                  @error('harga.*')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>

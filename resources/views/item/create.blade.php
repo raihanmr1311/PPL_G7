@@ -38,7 +38,9 @@
                   </div>
                 @enderror
               </div>
-              <button class="btn btn-primary float-right" type="submit">Tambah</button>
+              <button class="btn btn-primary float-right" type="submit">Simpan</button>
+              <a href="{{ route('items.index') }}" class="btn btn-outline-primary mr-2 float-right"
+                type="submit">Batal</a>
             </div>
 
           </form>

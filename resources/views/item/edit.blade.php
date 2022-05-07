@@ -10,7 +10,7 @@
     <div class="section-body">
       <div class="card">
         <div class="card-body">
-          <form class="row" method="POST" action="{{ route('items.update', $item->id) }}">
+          <form id="updateForm" class="row" method="POST" action="{{ route('items.update', $item->id) }}">
             @method('PUT')
             @csrf
             <div class="col-lg-6 col-md-12 col-12">
@@ -41,7 +41,7 @@
                 @enderror
               </div>
 
-              <button class="btn btn-primary float-right" type="submit">Ubah</button>
+              <span onclick="confirmUpdate(updateForm)" class="btn btn-primary float-right" type="submit">Ubah</span>
             </div>
 
           </form>
@@ -50,3 +50,23 @@
     </div>
   </section>
 @endsection
+
+@push('javascript')
+  <script>
+    function confirmUpdate(form) {
+      Swal.fire({
+          title: 'Apakah anda yakin mengubah data?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ya',
+          reverseButtons: true,
+          cancelButtonText: 'Tidak',
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            $(form).trigger('submit');
+          }
+        });
+    }
+  </script>
+@endpush

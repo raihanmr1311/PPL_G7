@@ -10,7 +10,7 @@
     <div class="section-body">
       <div class="card">
         <div class="card-body">
-          <form class="row" method="POST" action="{{ route('incomes.update', $income->id) }}">
+          <form id="formUpdate" class="row" method="POST" action="{{ route('incomes.update', $income->id) }}">
             @csrf
             @method('PUT')
             <div class="col">
@@ -36,7 +36,8 @@
 
                       <input type="hidden" value="{{ $income->id }}" name="id[]" class="incomeId">
                       <div class="form-group col-xl-4">
-                        <select required class="form-control @error('id_barang[]') is-invalid @enderror" name="id_barang[]" id="">
+                        <select required class="form-control @error('id_barang.*') is-invalid @enderror"
+                          name="id_barang.*" id="">
                           @foreach ($items as $item)
                             <option value="{{ $item->id }}" {{ $item->id == $income->item->id ? 'selected' : '' }}>
                               {{ $item->nama }}
@@ -53,8 +54,8 @@
                       <div class="form-group col-xl-2">
                         <input placeholder="Kuantitas" id="kuantitas" required
                           value="{{ old('kuantitas[]', $income->kuantitas) }}" type="number" name="kuantitas[]"
-                          class="form-control @error('kuantitas[]') is-invalid @enderror">
-                        @error('kuantitas[]')
+                          class="form-control @error('kuantitas.*') is-invalid @enderror">
+                        @error('kuantitas.*')
                           <div class="invalid-feedback">
                             {{ $message }}
                           </div>
@@ -63,8 +64,8 @@
 
                       <div class="form-group col-xl-4">
                         <input placeholder="Harga" required id="tanggal" value="{{ old('harga[]', $income->harga) }}"
-                          type="number" name="harga[]" class="form-control @error('harga[]') is-invalid @enderror">
-                        @error('harga[]')
+                          type="number" name="harga[]" class="form-control @error('harga.*') is-invalid @enderror">
+                        @error('harga.*')
                           <div class="invalid-feedback">
                             {{ $message }}
                           </div>
@@ -88,7 +89,7 @@
 
                 </div>
               </div>
-              <button class="btn btn-primary float-right" type="submit">Simpan</button>
+              <span onclick="confirmUpdate(updateForm)" class="btn btn-primary float-right" type="submit">Simpan</span>
               <a href="{{ route('incomes.index') }}" class="btn btn-outline-primary mr-2 float-right"
                 type="submit">Batal</a>
             </div>
@@ -114,15 +115,15 @@
                 <div class="form-group col-xl-4">
                     <select required class="form-control @error('id_barang[]') is-invalid @enderror" name="id_barang[]" id="">
                         @foreach ($items as $item)
-                        <option value="{{ $item->id }}" {{ $item->id == $income->item->nama }}>
+                          <option value="{{ $item->id }}" {{ $item->id == $income->item->nama }}>
                             {{ $item->nama }}
-                        </option>
+                          </option>
                         @endforeach
                     </select>
                     @error('id_barang[]')
-                        <div class="invalid-feedback">
+                      <div class="invalid-feedback">
                         {{ $message }}
-                        </div>
+                      </div>
                     @enderror
                 </div>
 
@@ -172,5 +173,21 @@
       $(this).parent('').parent('').remove(); //Remove field html
       x--;
     });
+
+    function confirmUpdate(form) {
+      Swal.fire({
+          title: 'Apakah anda yakin mengubah data?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ya',
+          reverseButtons: true,
+          cancelButtonText: 'Tidak',
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            $(form).trigger('submit');
+          }
+        });
+    }
   </script>
 @endpush

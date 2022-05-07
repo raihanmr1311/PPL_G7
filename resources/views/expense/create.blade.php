@@ -31,9 +31,9 @@
                 <div id="input_container">
                   <div class="row">
                     <div class="form-group col-xl-4">
-                      <input placeholder="Pengeluaran" id="tanggal" value="{{ old('pengeluaran[]') }}" type="text"
-                        name="pengeluaran[]" class="form-control @error('pengeluaran[]') is-invalid @enderror">
-                      @error('pengeluaran[]')
+                      <input placeholder="Pengeluaran" id="tanggal" type="text" name="pengeluaran[]"
+                        class="form-control @error('pengeluaran.*') is-invalid @enderror">
+                      @error('pengeluaran.*')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -41,9 +41,9 @@
                     </div>
 
                     <div class="form-group col-xl-2">
-                      <input placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
-                        name="kuantitas[]" class="form-control @error('kuantitas[]') is-invalid @enderror">
-                      @error('kuantitas[]')
+                      <input placeholder="Kuantitas" id="tanggal" type="number" name="kuantitas[]"
+                        class="form-control @error('kuantitas.*') is-invalid @enderror">
+                      @error('kuantitas.*')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -51,9 +51,9 @@
                     </div>
 
                     <div class="form-group col-xl-4">
-                      <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
-                        class="form-control @error('harga[]') is-invalid @enderror">
-                      @error('harga[]')
+                      <input placeholder="Harga" id="tanggal" type="number" name="harga[]"
+                        class="form-control @error('harga.*') is-invalid @enderror">
+                      @error('harga.*')
                         <div class="invalid-feedback">
                           {{ $message }}
                         </div>
@@ -68,7 +68,9 @@
                 </div>
               </div>
 
-              <button class="btn btn-primary float-right" type="submit">Tambah</button>
+              <button class="btn btn-primary float-right" type="submit">Simpan</button>
+              <a href="{{ route('expenses.index') }}" class="btn btn-outline-primary mr-2 float-right"
+                type="submit">Batal</a>
             </div>
 
           </form>
@@ -87,7 +89,7 @@
     var fieldHTML = `
             <div class="row">
                 <div class="form-group col-xl-4">
-                 <input placeholder="Pengeluaran" id="tanggal" value="{{ old('pengeluaran[]') }}" type="text"
+                 <input placeholder="Pengeluaran" id="tanggal" type="text"
                     name="pengeluaran[]" class="form-control @error('pengeluaran[]') is-invalid @enderror">
                   @error('pengeluaran[]')
                     <div class="invalid-feedback">
@@ -97,7 +99,7 @@
                 </div>
 
                 <div class="form-group col-xl-2">
-                  <input placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
+                  <input placeholder="Kuantitas" id="tanggal" type="number"
                     name="kuantitas[]" class="form-control @error('kuantitas[]') is-invalid @enderror">
                   @error('kuantitas[]')
                     <div class="invalid-feedback">
@@ -107,7 +109,7 @@
                 </div>
 
                 <div class="form-group col-xl-4">
-                  <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
+                  <input placeholder="Harga" id="tanggal"  type="number" name="harga[]"
                     class="form-control @error('harga[]') is-invalid @enderror">
                   @error('harga[]')
                     <div class="invalid-feedback">

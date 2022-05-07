@@ -91,6 +91,7 @@
           text: 'Data yang sudah dihapus tidak bisa dikembalikan lagi',
           icon: 'warning',
           showCancelButton: true,
+          reverseButtons: true,
           confirmButtonText: 'Ya',
           cancelButtonText: 'Tidak',
         })
