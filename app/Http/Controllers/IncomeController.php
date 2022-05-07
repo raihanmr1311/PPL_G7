@@ -94,7 +94,6 @@ class IncomeController extends Controller
 
     public function update(Request $request, Income $income)
     {
-
         if ($request->has('deleteId')) {
             IncomeDetail::destroy($request->deleteId);
         }
@@ -123,7 +122,9 @@ class IncomeController extends Controller
         }
 
         $income->update(['tanggal' => $data['tanggal']]);
+        Wallet::decreaseBalance($income->total_harga);
         IncomeDetail::upsert($detail, ['id'], ['id_barang', 'kuantitas', 'harga']);
+        Wallet::increaseBalance($income->total_harga);
         return redirect(route('incomes.index'))->with('success', 'Data berhasil diubah');
     }
 

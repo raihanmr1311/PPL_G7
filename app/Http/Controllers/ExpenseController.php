@@ -115,7 +115,9 @@ class ExpenseController extends Controller
         }
 
         $expense->update(['tanggal' => $data['tanggal']]);
+        Wallet::decreaseBalance($expense->total_harga);
         ExpenseDetail::upsert($detail, ['id'], ['pengeluaran', 'kuantitas', 'harga']);
+        Wallet::increaseBalance($expense->total_harga);
         return redirect(route('expenses.index'))->with('success', 'Data berhasil diubah');
 
         // return redirect(route('expenses.index'))->with('error', 'Terjadi kesalahan ketika mengubah data');

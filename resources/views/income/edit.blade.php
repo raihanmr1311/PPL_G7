@@ -10,7 +10,7 @@
     <div class="section-body">
       <div class="card">
         <div class="card-body">
-          <form id="formUpdate" class="row" method="POST" action="{{ route('incomes.update', $income->id) }}">
+          <form id="updateForm" class="row" method="POST" action="{{ route('incomes.update', $income->id) }}">
             @csrf
             @method('PUT')
             <div class="col">
@@ -37,7 +37,7 @@
                       <input type="hidden" value="{{ $income->id }}" name="id[]" class="incomeId">
                       <div class="form-group col-xl-4">
                         <select required class="form-control @error('id_barang.*') is-invalid @enderror"
-                          name="id_barang.*" id="">
+                          name="id_barang[]" id="">
                           @foreach ($items as $item)
                             <option value="{{ $item->id }}" {{ $item->id == $income->item->id ? 'selected' : '' }}>
                               {{ $item->nama }}
