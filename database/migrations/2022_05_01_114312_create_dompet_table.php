@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('dompet', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('balance')->default(0);
+            $table->bigInteger('balance')->default(0);
         });
     }
 

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Employe;
+use App\Models\Wallet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +30,10 @@ class DatabaseSeeder extends Seeder
                 'nomor' => '20E',
                 'no_hp' => '02187491287421'
             ]
+        );
+
+        Wallet::create(
+            ['balance' => 0]
         );
     }
 }
