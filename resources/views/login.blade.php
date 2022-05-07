@@ -20,21 +20,23 @@
             <p class="text-muted">Silahkan login untuk masuk ke menu admin.</p>
             <form method="POST" action="{{ route('login') }}">
               @error('authError')
-              <div class="alert alert-danger">
+                <div class="alert alert-danger">
                   Kredesial yang diberikan tidak ditemukan
-              </div>
+                </div>
               @enderror
               <div class="form-group">
                 <label for="nama_pengguna">Nama Pengguna</label>
-                <input id="nama_pengguna" type="text" class="form-control" name="nama_pengguna" tabindex="1" required
-                  autofocus>
+                <input id="nama_pengguna" oninvalid="this.setCustomValidity('Username dan password harus diisi')"
+                  oninput="this.setCustomValidity('')" type="text" class="form-control" name="nama_pengguna"
+                  tabindex="1" required autofocus>
               </div>
 
               <div class="form-group">
                 <div class="d-block">
                   <label for="password" class="control-label">Kata Sandi</label>
                 </div>
-                <input id="password" type="password" name="password" class="form-control" name="password" tabindex="2"
+                <input id="password" oninvalid="this.setCustomValidity('Username dan password harus diisi')"
+                oninput="this.setCustomValidity('')" type="password" name="password" class="form-control" name="password" tabindex="2"
                   required>
               </div>
 

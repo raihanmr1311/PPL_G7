@@ -19,7 +19,7 @@ class AuthController extends Controller
             return redirect()->intended();
         } else {
             throw ValidationException::withMessages([
-                'authError' => 'Kredensial yang Anda berikan tidak dapat diverifikasi.'
+                'authError' => 'Username atau password salah.'
             ]);
         }
 
