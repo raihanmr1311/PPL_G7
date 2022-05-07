@@ -33,7 +33,7 @@
     async function changeHtmlBalance() {
       var result = await getData();
       $('#liveMoney').html(`Rp. ${result.data.balance}`);
-      setTimeout(changeHtmlBalance, 2000);
+      setTimeout(changeHtmlBalance, 5000);
     }
 
     changeHtmlBalance();
