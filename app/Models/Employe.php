@@ -23,4 +23,9 @@ class Employe extends Authenticatable
     {
         return $this->hasMany(Expense::class, 'id_karyawan');
     }
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
