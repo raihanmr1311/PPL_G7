@@ -24,12 +24,7 @@ class Wallet extends Model
     {
         $wallet = self::find(1);
         $previousBalance = $wallet->balance;
-
-        if ($previousBalance < $amount) {
-            $wallet->update(['balance' => 0]);
-        } else {
-            $wallet->update(['balance' => $previousBalance - $amount]);
-        }
+        $wallet->update(['balance' => $previousBalance - $amount]);
     }
 
     public  static function updateBalance(int $prevAmount, int $nextAmount)
