@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('incomes', IncomeController::class);
     Route::resource('expenses', ExpenseController::class);
 
-    Route::view('/', 'dashboard')->name('dashboard');
+    Route::get('/', [MiscController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });

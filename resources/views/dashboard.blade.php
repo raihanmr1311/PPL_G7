@@ -13,14 +13,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
           <div class="card card-statistic-1">
             <div class="card-icon bg-primary">
-              <i class="far fa-user"></i>
+              <i class="fas fa-boxes"></i>
             </div>
             <div class="card-wrap">
               <div class="card-header">
                 <h4>Total Produk</h4>
               </div>
               <div class="card-body">
-                10
+                {{ $itemCount }}
               </div>
             </div>
           </div>
@@ -28,14 +28,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
           <div class="card card-statistic-1">
             <div class="card-icon bg-danger">
-              <i class="far fa-newspaper"></i>
+              <i class="fas fa-user"></i>
             </div>
             <div class="card-wrap">
               <div class="card-header">
                 <h4>Total Admin</h4>
               </div>
               <div class="card-body">
-                42
+                {{ $adminCount }}
               </div>
             </div>
           </div>
@@ -43,14 +43,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
           <div class="card card-statistic-1">
             <div class="card-icon bg-warning">
-              <i class="far fa-file"></i>
+              <i class="fas fa-dollar-sign"></i>
             </div>
             <div class="card-wrap">
               <div class="card-header">
-                <h4>Total Penjualan</h4>
+                <h4>Penjualan bulan ini</h4>
               </div>
               <div class="card-body">
-                15
+                {{ $monthIncome }}
               </div>
             </div>
           </div>
@@ -58,14 +58,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
           <div class="card card-statistic-1">
             <div class="card-icon bg-success">
-              <i class="fas fa-circle"></i>
+              <i class="fas fa-cart-plus"></i>
             </div>
             <div class="card-wrap">
               <div class="card-header">
-                <h4>Total Pembelian</h4>
+                <h4>Pembelian bulan ini</h4>
               </div>
               <div class="card-body">
-                47
+                {{ $monthExpense }}
               </div>
             </div>
           </div>
@@ -76,12 +76,6 @@
           <div class="card">
             <div class="card-header">
               <h4>Statistik</h4>
-              <div class="card-header-action">
-                <div class="btn-group">
-                  <a href="#" class="btn btn-primary">Bulan</a>
-                  <a href="#" class="btn">Minggu</a>
-                </div>
-              </div>
             </div>
             <div class="card-body">
               <canvas id="myChart" height="120"></canvas>
@@ -99,10 +93,10 @@
     var myChart = new Chart(statistics_chart, {
       type: 'line',
       data: {
-        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        labels: {!! $profitChart->map(fn(Flowframe\Trend\TrendValue $value) => $value->date) !!},
         datasets: [{
-          label: 'Statistics',
-          data: [640, 387, 530, 302, 430, 270, 488],
+          label: 'Keuntungan',
+          data: {!! $profitChart->map(fn(Flowframe\Trend\TrendValue $value) => $value->aggregate) !!},
           borderWidth: 5,
           borderColor: '#6777ef',
           backgroundColor: 'transparent',
