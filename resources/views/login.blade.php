@@ -21,7 +21,7 @@
             <form method="POST" action="{{ route('login') }}">
               @error('authError')
                 <div class="alert alert-danger">
-                  Kredesial yang diberikan tidak ditemukan
+                  {{ $message }}
                 </div>
               @enderror
               <div class="form-group">
@@ -36,8 +36,8 @@
                   <label for="password" class="control-label">Kata Sandi</label>
                 </div>
                 <input id="password" oninvalid="this.setCustomValidity('Username dan password harus diisi')"
-                oninput="this.setCustomValidity('')" type="password" name="password" class="form-control" name="password" tabindex="2"
-                  required>
+                  oninput="this.setCustomValidity('')" type="password" name="password" class="form-control"
+                  name="password" tabindex="2" required>
               </div>
 
               <div class="form-group text-right">
