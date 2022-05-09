@@ -78,8 +78,6 @@
                 </div>
               </div>
               <button class="btn btn-primary float-right" type="submit">Simpan</button>
-              <a href="{{ route('incomes.index') }}" class="btn btn-outline-primary mr-2 float-right"
-                type="submit">Batal</a>
             </div>
 
           </form>
