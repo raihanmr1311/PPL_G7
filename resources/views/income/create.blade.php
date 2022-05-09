@@ -60,6 +60,9 @@
                     <div class="form-group col-xl-4">
                       <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
                         class="form-control @error('harga.*') is-invalid @enderror">
+                        <small class="form-text text-muted">
+                            Jika harga tidak diisi maka harga akan diambil dari data produk
+                        </small>
                       @error('harga.*')
                         <div class="invalid-feedback">
                           {{ $message }}
@@ -123,6 +126,9 @@
                 <div class="form-group col-xl-4">
                   <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
                     class="form-control @error('harga.*') is-invalid @enderror">
+                    <small class="form-text text-muted">
+                            Jika harga tidak diisi maka harga akan diambil dari data produk
+                    </small>
                   @error('harga.*')
                     <div class="invalid-feedback">
                       {{ $message }}

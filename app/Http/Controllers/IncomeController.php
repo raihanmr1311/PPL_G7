@@ -54,13 +54,13 @@ class IncomeController extends Controller
             'kuantitas' => 'required|array|min:1|max:10',
             'kuantitas.*' => 'required|numeric',
             'harga' => 'required|array|min:1|max:10',
-            'harga.*' => 'required|numeric',
+            'harga.*' => 'nullable|numeric',
         ]);
 
         for ($i = 0; $i < count($data['id_barang']); $i++) {
             $tempData['id_barang'] = $data['id_barang'][$i];
             $tempData['kuantitas'] = $data['kuantitas'][$i];
-            $tempData['harga'] = $data['harga'][$i];
+            $tempData['harga'] = $this->getItemPrice($data['id_barang'][$i], $data['harga'][$i]);;
             array_push($detail, $tempData);
         }
 
@@ -108,15 +108,15 @@ class IncomeController extends Controller
             'kuantitas.*' => 'required|numeric',
             'id' => '',
             'harga' => 'required|array|min:1|max:10',
-            'harga.*' => 'required|numeric',
+            'harga.*' => 'nullable|numeric',
         ]);
 
 
         for ($i = 0; $i < count($data['id_barang']); $i++) {
             $tempData['id'] = $data['id'][$i];
             $tempData['id_barang'] = $data['id_barang'][$i];
-            $tempData['kuantitas'] = $data['kuantitas'][$i];
-            $tempData['harga'] = $data['harga'][$i];
+            $tempData['kuantitas'] =  $data['kuantitas'][$i];
+            $tempData['harga'] = $this->getItemPrice($data['id_barang'][$i], $data['harga'][$i]);
             $tempData['id_pemasukan'] = $income->id;
             array_push($detail, $tempData);
         }
@@ -136,5 +136,13 @@ class IncomeController extends Controller
         }
 
         return redirect(route('incomes.index'))->with('error', 'Terjadi kesalahan ketika menghapus data');
+    }
+
+    private function getItemPrice(string $id, ?int $amount): int
+    {
+        if ($amount != null) {
+            return $amount;
+        }
+        return Item::find($id)->harga;
     }
 }
