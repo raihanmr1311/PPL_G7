@@ -17,12 +17,14 @@
     <li class="dropdown {{ request()->routeIs('incomes.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fa-dollar-sign"></i> <span>Pemasukan</span></a>
       <ul class="dropdown-menu">
-        <li class="{{ request()->routeIs('incomes.index') || request()->routeIs('incomes.show') ? 'active' : '' }}"><a class="nav-link"
-            href="{{ route('incomes.index') }}">Data Pemasukan</a></li>
+        <li class="{{ request()->routeIs('incomes.index') || request()->routeIs('incomes.show') ? 'active' : '' }}"><a
+            class="nav-link" href="{{ route('incomes.index') }}">Data Pemasukan</a></li>
         <li class="{{ request()->routeIs('incomes.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('incomes.create') }}">Tambah Pemasukan</a></li>
+        @owner
         <li class="{{ request()->routeIs('incomes.statistic') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('incomes.statistic') }}">Statistik Pemasukan</a></li>
+        @endowner
       </ul>
     </li>
 
@@ -30,12 +32,16 @@
     <li class="dropdown {{ request()->routeIs('expenses.*') ? 'active' : '' }}">
       <a href="" class="nav-link has-dropdown"><i class="fas fas fa-cart-plus"></i> <span>Pengeluaran</span></a>
       <ul class="dropdown-menu">
-        <li class="{{ request()->routeIs('expenses.index') || request()->routeIs('expenses.show') ? 'active' : '' }}"><a class="nav-link"
-            href="{{ route('expenses.index') }}">Data Pengeluaran</a></li>
+        <li
+          class="{{ request()->routeIs('expenses.index') || request()->routeIs('expenses.show') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('expenses.index') }}">Data Pengeluaran</a>
+        </li>
         <li class="{{ request()->routeIs('expenses.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('expenses.create') }}">Tambah Pengeluaran</a></li>
+        @owner
         <li class="{{ request()->routeIs('expenses.statistic') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('expenses.statistic') }}">Statistik Pengeluaran</a></li>
+        @endowner
       </ul>
     </li>
 
@@ -49,6 +55,7 @@
       </ul>
     </li>
 
+    @owner
     <li class="menu-header">Karyawan</li>
 
     <li class="dropdown {{ request()->routeIs('employes.*') ? 'active' : '' }}">
@@ -60,5 +67,6 @@
             href="{{ route('employes.create') }}">Tambah Karyawan</a></li>
       </ul>
     </li>
+    @endowner
   </ul>
 </aside>

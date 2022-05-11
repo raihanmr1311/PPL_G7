@@ -28,4 +28,14 @@ class Employe extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function isOwner()
+    {
+        return $this->role == 'OWNER';
+    }
+
+    public function isEmploye()
+    {
+        return $this->role == 'EMPLOYE';
+    }
 }
