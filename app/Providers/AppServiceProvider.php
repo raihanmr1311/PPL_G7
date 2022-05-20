@@ -28,5 +28,13 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('money', function ($amount) {
             return "<?php echo 'Rp' . number_format($amount, 2, ',', '.'); ?>";
         });
+
+        Blade::if('owner', function () {
+            return auth()->user()->isOwner();
+        });
+
+        Blade::if('employe', function () {
+            return auth()->user()->isEmploye();
+        });
     }
 }

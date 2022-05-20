@@ -5,11 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Models\Employe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
 
 class EmployeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            abort_if(Auth::user()->isEmploye(), 403);
+            return $next($request);
+        });
+    }
+
+
     public function index(Request $request)
     {
         $data = Employe::with('district')->select('karyawan.*');

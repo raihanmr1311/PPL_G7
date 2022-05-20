@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('nomor');
             $table->string('no_hp');
+            $table->enum('role', ['OWNER', 'EMPLOYE'])->default('EMPLOYE');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

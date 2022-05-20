@@ -32,6 +32,18 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        Employe::create(
+            [
+                'nama_lengkap' => 'Agus',
+                'nama_pengguna' => 'karyawan',
+                'id_kecamatan' => 2,
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                'alamat' => 'Jalan Bondowoso',
+                'nomor' => '20E',
+                'no_hp' => '02187491284422'
+            ]
+        );
+
         Wallet::create(
             ['balance' => 0]
         );
