@@ -36,7 +36,7 @@
 
                       <input type="hidden" value="{{ $income->id }}" name="id[]" class="incomeId">
                       <div class="form-group col-xl-4">
-                        <select required class="form-control @error('id_barang.*') is-invalid @enderror"
+                        <select class="form-control @error('id_barang.*') is-invalid @enderror"
                           name="id_barang[]" id="">
                           @foreach ($items as $item)
                             <option value="{{ $item->id }}" {{ $item->id == $income->item->id ? 'selected' : '' }}>
@@ -52,7 +52,7 @@
                       </div>
 
                       <div class="form-group col-xl-2">
-                        <input placeholder="Kuantitas" id="kuantitas" required
+                        <input placeholder="Kuantitas" id="kuantitas"
                           value="{{ old('kuantitas[]', $income->kuantitas) }}" type="number" name="kuantitas[]"
                           class="form-control @error('kuantitas.*') is-invalid @enderror">
                         @error('kuantitas.*')
@@ -63,7 +63,7 @@
                       </div>
 
                       <div class="form-group col-xl-4">
-                        <input placeholder="Harga" required id="tanggal" value="{{ old('harga[]', $income->harga) }}"
+                        <input placeholder="Harga" id="tanggal" value="{{ old('harga[]', $income->harga) }}"
                           type="number" name="harga[]" class="form-control @error('harga.*') is-invalid @enderror">
                           <small class="form-text text-muted">
                             Jika harga tidak diisi maka harga akan diambil dari data produk
@@ -117,7 +117,7 @@
             <div class="row">
                 <input type="hidden" value="" name="id[]" class="incomeId">
                 <div class="form-group col-xl-4">
-                    <select required class="form-control @error('id_barang[]') is-invalid @enderror" name="id_barang[]" id="">
+                    <select class="form-control @error('id_barang[]') is-invalid @enderror" name="id_barang[]" id="">
                         @foreach ($items as $item)
                           <option value="{{ $item->id }}" {{ $item->id == $income->item->nama }}>
                             {{ $item->nama }}
@@ -132,7 +132,7 @@
                 </div>
 
                 <div class="form-group col-xl-2">
-                  <input required placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
+                  <input placeholder="Kuantitas" id="tanggal" value="{{ old('kuantitas[]') }}" type="number"
                     name="kuantitas[]" class="form-control @error('kuantitas[]') is-invalid @enderror">
                   @error('kuantitas[]')
                     <div class="invalid-feedback">
@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="form-group col-xl-4">
-                  <input required placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
+                  <input placeholder="Harga" id="tanggal" value="{{ old('harga[]') }}" type="number" name="harga[]"
                     class="form-control @error('harga[]') is-invalid @enderror">
 
                         <small id="helpBlock" class="form-text text-muted">
@@ -198,5 +198,26 @@
           }
         });
     }
+
+$("#updateForm").validate({
+  rules: {
+    'id_barang[]': {
+      required: true
+    },
+    'kuantitas[]': {
+      required: true
+    },
+  },
+  errorElement: "em",
+	errorPlacement: function ( error, element ) {
+	    error.addClass( "invalid-feedback" );
+	},
+	highlight: function ( element, errorClass, validClass ) {
+	    $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+	},
+	unhighlight: function (element, errorClass, validClass) {
+	    $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+	}
+});
   </script>
 @endpush

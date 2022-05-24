@@ -10,7 +10,7 @@
     <div class="section-body">
       <div class="card">
         <div class="card-body">
-          <form class="row" method="POST" action="{{ route('incomes.store') }}">
+          <form id="createForm" class="row" method="POST" action="{{ route('incomes.store') }}">
             @csrf
             <div class="col">
               <div class="form-group">
@@ -156,5 +156,26 @@
       $(this).parent('').parent('').remove(); //Remove field html
       x--;
     });
+
+$("#createForm").validate({
+  rules: {
+    'id_barang[]': {
+      required: true
+    },
+    'kuantitas[]': {
+      required: true
+    },
+  },
+  errorElement: "em",
+	errorPlacement: function ( error, element ) {
+	    error.addClass( "invalid-feedback" );
+	},
+	highlight: function ( element, errorClass, validClass ) {
+	    $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+	},
+	unhighlight: function (element, errorClass, validClass) {
+	    $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+	}
+})
   </script>
 @endpush

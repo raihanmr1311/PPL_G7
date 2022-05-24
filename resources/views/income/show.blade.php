@@ -10,7 +10,7 @@
 
     <div class="section-body">
       <div class="invoice">
-        <a href="{{ route('incomes.index') }}" class="btn btn-icon icon-left mb-4">
+        <a href="{{ route('incomes.index') }}" class="btn btn-primary btn-icon icon-left mb-4">
           <i class="fas fa-arrow-left"></i> Kembali
         </a>
         <div class="invoice-print">
