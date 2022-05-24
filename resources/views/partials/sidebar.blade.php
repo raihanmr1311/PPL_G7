@@ -22,8 +22,8 @@
         <li class="{{ request()->routeIs('incomes.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('incomes.create') }}">Tambah Pemasukan</a></li>
         @owner
-        <li class="{{ request()->routeIs('incomes.statistic') ? 'active' : '' }}"><a class="nav-link"
-            href="{{ route('incomes.statistic') }}">Statistik Pemasukan</a></li>
+          <li class="{{ request()->routeIs('incomes.statistic') ? 'active' : '' }}"><a class="nav-link"
+              href="{{ route('incomes.statistic') }}">Statistik Pemasukan</a></li>
         @endowner
       </ul>
     </li>
@@ -39,8 +39,8 @@
         <li class="{{ request()->routeIs('expenses.create') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('expenses.create') }}">Tambah Pengeluaran</a></li>
         @owner
-        <li class="{{ request()->routeIs('expenses.statistic') ? 'active' : '' }}"><a class="nav-link"
-            href="{{ route('expenses.statistic') }}">Statistik Pengeluaran</a></li>
+          <li class="{{ request()->routeIs('expenses.statistic') ? 'active' : '' }}"><a class="nav-link"
+              href="{{ route('expenses.statistic') }}">Statistik Pengeluaran</a></li>
         @endowner
       </ul>
     </li>
@@ -55,7 +55,7 @@
       </ul>
     </li>
 
-    @owner
+
     <li class="menu-header">Karyawan</li>
 
     <li class="dropdown {{ request()->routeIs('employes.*') ? 'active' : '' }}">
@@ -63,10 +63,11 @@
       <ul class="dropdown-menu">
         <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}"><a class="nav-link"
             href="{{ route('employes.index') }}">Data Karyawan</a></li>
-        <li class="{{ request()->routeIs('employes.create') ? 'active' : '' }}"><a class="nav-link"
-            href="{{ route('employes.create') }}">Tambah Karyawan</a></li>
+        @owner
+          <li class="{{ request()->routeIs('employes.create') ? 'active' : '' }}"><a class="nav-link"
+              href="{{ route('employes.create') }}">Tambah Karyawan</a></li>
+        @endowner
       </ul>
     </li>
-    @endowner
   </ul>
 </aside>

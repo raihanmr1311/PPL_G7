@@ -16,7 +16,7 @@ class EmployeController extends Controller
         $this->middleware(function ($request, $next) {
             abort_if(Auth::user()->isEmploye(), 403);
             return $next($request);
-        });
+        })->except('index');
     }
 
 

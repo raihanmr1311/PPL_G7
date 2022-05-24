@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
             $table->softDeletes();
-            $table->string('nama', 32);
+            $table->string('nama', 50);
             $table->unsignedBigInteger('harga')->default(0);
         });
     }

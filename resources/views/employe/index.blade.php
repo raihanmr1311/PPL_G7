@@ -26,7 +26,9 @@
                       <th>Kecamatan</th>
                       <th>Nomor</th>
                       <th>Nomor HP</th>
-                      <th>Aksi</th>
+                      @owner
+                        <th>Aksi</th>
+                      @endowner
                     </tr>
                   </thead>
                   <tbody>
@@ -48,19 +50,21 @@
   <script>
     @if ($message = Session::get('success'))
       iziToast.success({
-      title: '{{ $message }}',
-      position: 'topRight',
+        title: '{{ $message }}',
+        position: 'topRight',
       });
-    @elseif($message = Session::get('error'))
+    @elseif ($message = Session::get('error'))
       iziToast.success({
-      title: '{{ $message }}',
-      position: 'topRight',
+        title: '{{ $message }}',
+        position: 'topRight',
       });
     @endif
     $("#table-1").dataTable({
       processing: true,
       serverSide: true,
-      order: [[0, 'desc']],
+      order: [
+        [0, 'desc']
+      ],
       ajax: '{{ route('employes.index') }}',
       columns: [{
           searchable: false,
@@ -87,11 +91,13 @@
         {
           data: 'no_hp'
         },
-        {
-          searchable: false,
-          orderable: false,
-          data: 'action'
-        },
+        @owner
+          {
+            searchable: false,
+            orderable: false,
+            data: 'action'
+          }
+        @endowner
       ]
     });
 
