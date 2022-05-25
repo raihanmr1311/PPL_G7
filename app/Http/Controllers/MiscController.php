@@ -70,7 +70,7 @@ class MiscController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $itemCount = Item::count();
         $adminCount = Employe::count();
@@ -78,6 +78,9 @@ class MiscController extends Controller
 
         $startOfMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
         $endOfMonth = Carbon::now()->endOfMonth()->format('Y-m-d');
+
+        $startMonth = now()->startOfYear();
+        $endMonth = now()->endOfYear();
 
 
         $monthIncome = Money::IDR(Profit::whereBetween('tanggal', [$startOfMonth, $endOfMonth])
@@ -87,15 +90,34 @@ class MiscController extends Controller
             ->select("pengeluaran")->get()[0]['pengeluaran'] ?? 0, true);
 
         if (auth()->user()->isOwner()) {
+
+            if ($request->has('range')) {
+                $dates = explode(' - ', $request->range);
+                $startMonth = Carbon::parse($dates[0])->startOfMonth();
+                $endMonth = Carbon::parse($dates[1])->endOfMonth();
+            }
+
+
             $profitChart = Trend::model(Profit::class)
-                ->between(now()->startOfYear(), end: now()->endOfYear())
+                ->between(start: $startMonth, end: $endMonth)
                 ->dateColumn('tanggal')
                 ->perMonth()
                 ->sum('keuntungan');
         }
 
+        $maxMonth = now()->endOfYear();
 
-        return view('dashboard', compact('profitChart', 'itemCount', 'adminCount', 'monthIncome', 'monthExpense'));
+
+        return view('dashboard', compact(
+            'profitChart',
+            'itemCount',
+            'adminCount',
+            'monthIncome',
+            'monthExpense',
+            'startMonth',
+            'endMonth',
+            'maxMonth',
+        ));
     }
 
     public function profile()
