@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('nomor');
             $table->string('no_hp');
+            $table->char('district_id', 7);
             $table->enum('role', ['OWNER', 'EMPLOYE'])->default('EMPLOYE');
             $table->rememberToken();
             $table->softDeletes();

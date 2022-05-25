@@ -16,7 +16,7 @@ class Employe extends Authenticatable
 
     public function district()
     {
-        return $this->belongsTo(District::class, 'id_kecamatan');
+        return $this->belongsTo(District::class, 'district_id');
     }
 
     public function expenses()

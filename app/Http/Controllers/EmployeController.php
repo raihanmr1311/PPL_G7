@@ -37,7 +37,7 @@ class EmployeController extends Controller
                     </span>
                 </form>';
             })->addColumn('kecamatan', function (Employe $employe) {
-                return $employe->district->kecamatan;
+                return ucwords(strtolower($employe->district->name));
             })->make(true);
         }
 
@@ -61,7 +61,7 @@ class EmployeController extends Controller
                 'alamat' => 'required',
                 'nomor' => 'required',
                 'password' => 'required',
-                'id_kecamatan' => 'required'
+                'district_id' => 'required'
             ]
         );
 
@@ -77,8 +77,7 @@ class EmployeController extends Controller
 
     public function edit(Employe $employe)
     {
-        $districts = District::all();
-        return view('employe.edit', compact('employe', 'districts'));
+        return view('employe.edit', compact('employe'));
     }
 
     public function update(Request $request, Employe $employe)
@@ -90,7 +89,7 @@ class EmployeController extends Controller
             'alamat' => 'required',
             'nomor' => 'required',
             'password' => '',
-            'id_kecamatan' => 'required'
+            'district_id' => 'required'
         ]);
 
         if (!$request->password) {

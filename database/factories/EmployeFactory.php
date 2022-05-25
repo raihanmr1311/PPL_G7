@@ -19,11 +19,11 @@ class EmployeFactory extends Factory
         return [
             'nama_lengkap' => $this->faker->name(),
             'nama_pengguna' => $this->faker->userName(),
-            'id_kecamatan' => $this->faker->numberBetween(1, 9),
+            'district_id' => 3511050,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'alamat' => $this->faker->address(),
             'nomor' => $this->faker->streetAddress(),
-            'no_hp' => $this->faker->phoneNumber()
+            'no_hp' => $this->faker->phoneNumber(),
         ];
     }
 }

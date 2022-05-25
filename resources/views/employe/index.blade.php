@@ -82,8 +82,7 @@
           data: 'alamat'
         },
         {
-          data: 'kecamatan',
-          name: 'district.kecamatan'
+          data: 'kecamatan'
         },
         {
           data: 'nomor'

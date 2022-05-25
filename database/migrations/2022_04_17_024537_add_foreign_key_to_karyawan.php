@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::table('karyawan', function (Blueprint $table) {
             $table->after('id', function ($table) {
-                $table->foreignId('id_kecamatan')->constrained('kecamatan')->cascadeOnUpdate()->restrictOnDelete();
+                $table->foreign('district_id')
+                    ->references('id')
+                    ->on('districts')
+                    ->onUpdate('cascade')->onDelete('restrict');
             });
         });
     }
