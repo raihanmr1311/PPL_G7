@@ -55,19 +55,26 @@
       </ul>
     </li>
 
+    @owner
+      <li class="menu-header">Karyawan</li>
+      <li class="dropdown {{ request()->routeIs('employes.*') ? 'active' : '' }}">
+        <a href="" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Karyawan</span></a>
+        <ul class="dropdown-menu">
+          <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}"><a class="nav-link"
+              href="{{ route('employes.index') }}">Data Karyawan</a></li>
 
-    <li class="menu-header">Karyawan</li>
-
-    <li class="dropdown {{ request()->routeIs('employes.*') ? 'active' : '' }}">
-      <a href="" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Karyawan</span></a>
-      <ul class="dropdown-menu">
-        <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}"><a class="nav-link"
-            href="{{ route('employes.index') }}">Data Karyawan</a></li>
-        @owner
           <li class="{{ request()->routeIs('employes.create') ? 'active' : '' }}"><a class="nav-link"
               href="{{ route('employes.create') }}">Tambah Karyawan</a></li>
-        @endowner
-      </ul>
-    </li>
+        </ul>
+      </li>
+    @endowner
+
+    @employe
+      <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('employes.index') }}">
+          <i class="fas fa-users"></i> <span>Data Karyawan</span>
+        </a>
+      </li>
+    @endemploye
   </ul>
 </aside>
