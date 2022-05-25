@@ -125,7 +125,7 @@ class ExpenseController extends Controller
 
     public function destroy(Expense $expense)
     {
-        Wallet::decreaseBalance($expense->total_harga);
+        Wallet::increaseBalance($expense->total_harga);
         if ($expense->delete()) {
             return redirect(route('expenses.index'))->with('success', 'Data berhasil dihapus');
         }
