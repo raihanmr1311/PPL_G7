@@ -20,7 +20,7 @@
                       <th class="text-center">
                         #
                       </th>
-                      <th>Karyawan</th>
+                      <th>User</th>
                       <th>Total Barang</th>
                       <th>Total Harga</th>
                       <th>Tanggal</th>
