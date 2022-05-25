@@ -14,6 +14,11 @@
           <div class="card">
             <div class="card-header">
               <h4>Pemasukan per minggu</h4>
+              <div class="card-header-action">
+                <form id="rangeForm" action="{{route('incomes.statistic')}}" method="get">
+                    <input type="text" name="range" class="form-control incomerange">
+                </form>
+              </div>
             </div>
             <div class="card-body">
               <canvas id="incomesChart" height="120"></canvas>
@@ -66,5 +71,22 @@
         },
       }
     });
+
+    $('.incomerange').daterangepicker({
+        locale: {format: 'YYYY-MM-DD'},
+        drops: 'down',
+        startDate: '{{$startWeek}}',
+        endDate: '{{$endWeek}}',
+        maxDate: '{{$maxDate}}',
+        opens: 'left',
+        dateLimit: {
+            'months': 1,
+            'days': -1
+        }
+      })
+
+    $('.incomerange').change(function () {
+        $('#rangeForm').trigger('submit')
+    })
   </script>
 @endpush

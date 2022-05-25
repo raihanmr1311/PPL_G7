@@ -601,8 +601,14 @@ $(function() {
       $('.daterange').daterangepicker({
         locale: {format: 'YYYY-MM-DD'},
         drops: 'down',
-        opens: 'right'
-      });
+        maxDate: new Date(),
+        opens: 'right',
+        dateLimit: {
+            'months': 1,
+            'days': -1
+        }
+      }).on("changeDate", function (e) {
+        alert("Working");});
     }
   }
 

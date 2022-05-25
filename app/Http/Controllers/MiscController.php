@@ -8,35 +8,66 @@ use App\Models\ExpenseView;
 use App\Models\IncomeView;
 use App\Models\Item;
 use App\Models\Profit;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Flowframe\Trend\Trend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class MiscController extends Controller
 {
-    public function incomesStatistic()
+    public function incomesStatistic(Request $request)
     {
         abort_if(auth()->user()->isEmploye(), 403);
+
+        $startofWeek = now()->startOfWeek();
+        $endOfWeek = now()->endOfWeek();
+
+        if ($request->has('range')) {
+            $dates = explode(' - ', $request->range);
+            $startofWeek = Carbon::parse($dates[0]);
+            $endOfWeek = Carbon::parse($dates[1]);
+        }
+
+
         $incomesChart = Trend::model(IncomeView::class)
-            ->between(now()->startOfWeek(), now()->endOfWeek())
+            ->between($startofWeek, $endOfWeek)
             ->dateColumn('tanggal')
             ->perDay()
             ->sum('total_harga');
 
-        return view('income.statistic', compact('incomesChart'));
+        return view('income.statistic', [
+            'incomesChart' => $incomesChart,
+            'startWeek' => $startofWeek,
+            'endWeek' => $endOfWeek,
+            'maxDate' => now()->endOfWeek()
+        ]);
     }
 
-    public function expensesStatistic()
+    public function expensesStatistic(Request $request)
     {
         abort_if(auth()->user()->isEmploye(), 403);
+
+        $startofWeek = now()->startOfWeek();
+        $endOfWeek = now()->endOfWeek();
+
+        if ($request->has('range')) {
+            $dates = explode(' - ', $request->range);
+            $startofWeek = Carbon::parse($dates[0]);
+            $endOfWeek = Carbon::parse($dates[1]);
+        }
+
         $expensesChart = Trend::model(ExpenseView::class)
-            ->between(now()->startOfWeek(), now()->endOfWeek())
+            ->between($startofWeek, $endOfWeek)
             ->dateColumn('tanggal')
             ->perDay()
             ->sum('total_harga');
 
-        return view('expense.statistic', compact('expensesChart'));
+        return view('expense.statistic', [
+            'expensesChart' => $expensesChart,
+            'startWeek' => $startofWeek,
+            'endWeek' => $endOfWeek,
+            'maxDate' => now()->endOfWeek()
+        ]);
     }
 
     public function dashboard()
