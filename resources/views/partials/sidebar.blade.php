@@ -68,13 +68,5 @@
         </ul>
       </li>
     @endowner
-
-    @employe
-      <li class="{{ request()->routeIs('employes.index') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('employes.index') }}">
-          <i class="fas fa-users"></i> <span>Data Karyawan</span>
-        </a>
-      </li>
-    @endemploye
   </ul>
 </aside>
