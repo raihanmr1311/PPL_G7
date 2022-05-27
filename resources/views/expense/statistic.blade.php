@@ -38,7 +38,7 @@
       data: {
         labels: {!! $expensesChart->map(fn(Flowframe\Trend\TrendValue $value) => $value->date) !!},
         datasets: [{
-          label: 'Pendapatan',
+          label: 'Pengeluaran',
           data: {!! $expensesChart->map(fn(Flowframe\Trend\TrendValue $value) => $value->aggregate) !!},
           borderWidth: 5,
           borderColor: '#6777ef',
