@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <link rel="shortcut icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" type="image/x-icon">
   <title>Login &mdash; {{ config('app.name') }}</title>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
@@ -14,10 +15,12 @@
       <div class="d-flex flex-wrap align-items-stretch">
         <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
           <div class="p-4 m-3">
-            <img src="../assets/img/logo.png" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
-            <h4 class="text-dark font-weight-normal">Selamat datang di <span class="font-weight-bold">Ad'nDrink</span>
+            <img src="{{ asset('assets/img/logo.png') }}" alt="logo" width="80"
+              class="shadow-light rounded-circle mb-5 mt-2">
+            <h4 class="text-dark font-weight-normal">Selamat datang di <span
+                class="font-weight-bold">{{ config('app.name') }}</span>
             </h4>
-            <p class="text-muted">Silahkan login untuk masuk ke menu admin.</p>
+            <p class="text-muted">Silahkan login.</p>
             <form method="POST" action="{{ route('login') }}">
               @error('authError')
                 <div class="alert alert-danger">
@@ -48,13 +51,13 @@
             </form>
 
             <div class="text-center mt-5 text-small">
-              Copyright &copy; Ad'nDrink
+              Copyright &copy; {{ config('app.name') }} {{ date('Y') }}
             </div>
           </div>
         </div>
         <div
           class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
-          data-background="https://picsum.photos/1080/1920?random=1">
+          data-background="{{ asset('assets/img/' . rand(1, 2) . '.jpeg') }}">
         </div>
       </div>
     </section>
