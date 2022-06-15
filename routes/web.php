@@ -33,8 +33,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [MiscController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile', [MiscController::class, 'profile'])->name('profile');
-    Route::post('/profile', [MiscController::class, 'updateProfile'])->name('updateProfile');
-    Route::post('/profile/password', [MiscController::class, 'updatePassword'])->name('updatePassword');
 });
 
 Route::middleware(['guest'])->group(function () {

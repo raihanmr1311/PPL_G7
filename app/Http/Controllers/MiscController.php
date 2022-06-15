@@ -124,38 +124,4 @@ class MiscController extends Controller
     {
         return view('profile');
     }
-
-    public function updateProfile(Request $request)
-    {
-        $data = $request->validate([
-            'nama_lengkap' => 'required|string',
-            'nama_pengguna' => 'required|string|unique:karyawan,nama_pengguna,' . auth()->user()->id,
-            'alamat' => 'required|string',
-            'no_hp' => 'required|string'
-        ]);
-
-
-        if (auth()->user()->update($data)) {
-            return redirect(route('profile'))->with('success', 'Profil berhasil diubah');
-        }
-
-        return redirect(route('profile'))->with('error', 'Terjadi kesalahan ketika mengubah data');
-    }
-
-    public function updatePassword(Request $request)
-    {
-        $data = $request->validate([
-            'current_password' => 'required|current_password|string',
-            'password' => 'required|string|confirmed',
-        ]);
-
-
-        if (auth()->user()->update([
-            'password' => Hash::make($data['password'])
-        ])) {
-            return redirect(route('profile'))->with('success', 'Kata sandi berhasil diubah');
-        }
-
-        return redirect(route('profile'))->with('error', 'Terjadi kesalahan ketika mengubah data');
-    }
 }
