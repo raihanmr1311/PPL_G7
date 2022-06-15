@@ -90,8 +90,6 @@
                 </div>
               </div>
               <span onclick="confirmUpdate(updateForm)" class="btn btn-primary float-right" type="submit">Simpan</span>
-              <a href="{{ route('expenses.index') }}" class="btn btn-outline-primary mr-2 float-right"
-                type="submit">Batal</a>
             </div>
 
           </form>
