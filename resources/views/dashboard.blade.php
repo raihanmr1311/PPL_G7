@@ -32,7 +32,7 @@
             </div>
             <div class="card-wrap">
               <div class="card-header">
-                <h4>Total Admin</h4>
+                <h4>Total Karyawan</h4>
               </div>
               <div class="card-body">
                 {{ $adminCount }}
@@ -76,7 +76,7 @@
           <div class="col-lg-12 col-md-12 col-12 col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h4>Statistik</h4>
+                <h4>Statistik Laba</h4>
                 <div class="card-header-action">
                   <form id="rangeForm" action="{{ route('dashboard') }}" method="get">
                     <input type="text" name="range" class="form-control incomerange">
